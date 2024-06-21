@@ -6,77 +6,106 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>921</width>
-    <height>600</height>
+    <width>649</width>
+    <height>520</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Library</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="bukuButton">
     <property name="geometry">
      <rect>
-      <x>130</x>
-      <y>220</y>
-      <width>121</width>
+      <x>60</x>
+      <y>300</y>
+      <width>211</width>
       <height>91</height>
      </rect>
     </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#bukuButton {
+	border: none;
+	background-color: rgb(38, 154, 255);
+	color: rgb(255, 255, 255);
+}</string>
+    </property>
     <property name="text">
-     <string>Tambah Buku Baru</string>
+     <string>Buku</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
+   <widget class="QPushButton" name="peminjamanButton">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>300</y>
+      <width>211</width>
+      <height>91</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>24</pointsize>
+     </font>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#peminjamanButton {
+	border: none;
+	background-color: rgb(38, 154, 255);
+	color: rgb(255, 255, 255);
+}</string>
+    </property>
+    <property name="text">
+     <string>Peminjaman</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>100</y>
+      <width>49</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>140</x>
+      <y>130</y>
+      <width>391</width>
+      <height>101</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>36</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Perpustakaan Ilmu</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
       <x>290</x>
-      <y>220</y>
-      <width>121</width>
-      <height>91</height>
+      <y>100</y>
+      <width>51</width>
+      <height>51</height>
      </rect>
     </property>
     <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_3">
-    <property name="geometry">
-     <rect>
-      <x>460</x>
-      <y>220</y>
-      <width>121</width>
-      <height>91</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_4">
-    <property name="geometry">
-     <rect>
-      <x>150</x>
-      <y>350</y>
-      <width>75</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_5">
-    <property name="geometry">
-     <rect>
-      <x>350</x>
-      <y>110</y>
-      <width>141</width>
-      <height>81</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>TAMBAHHHH</string>
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;img src=&quot;:/image1/8832880 (1).png&quot;/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
    </widget>
   </widget>
@@ -85,8 +114,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>921</width>
-     <height>21</height>
+     <width>649</width>
+     <height>22</height>
     </rect>
    </property>
   </widget>
