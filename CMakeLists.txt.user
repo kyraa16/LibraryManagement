@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
+<<<<<<< HEAD
 <!-- Written by QtCreator 13.0.2, 2024-06-21T13:24:08. -->
+=======
+<!-- Written by QtCreator 13.0.2, 2024-06-20T18:26:59. -->
+>>>>>>> 8ebcc085e04c8c15b2b9db87748e3ee4155b2177
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -400,7 +404,11 @@
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>
     <value type="bool" key="RunConfiguration.UseQmlDebuggerAuto">true</value>
+<<<<<<< HEAD
     <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Users/kadek/Documents/LibraryManagement/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug</value>
+=======
+    <value type="QString" key="RunConfiguration.WorkingDirectory.default">C:/Made Aditya/Sublime Text/Belajar C - C++/qt-app/LibraryManagement/build/Desktop_Qt_6_7_1_MinGW_64_bit-Debug</value>
+>>>>>>> 8ebcc085e04c8c15b2b9db87748e3ee4155b2177
    </valuemap>
    <value type="qlonglong" key="ProjectExplorer.Target.RunConfigurationCount">1</value>
   </valuemap>

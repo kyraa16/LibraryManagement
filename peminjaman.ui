@@ -13,6 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
+<<<<<<< HEAD
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
@@ -24,6 +25,39 @@
    </property>
    <property name="text">
     <string>Pinjam Buku</string>
+=======
+  <widget class="QTableWidget" name="tableWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>40</y>
+     <width>211</width>
+     <height>192</height>
+    </rect>
+   </property>
+   <column>
+    <property name="text">
+     <string>Judul</string>
+    </property>
+   </column>
+   <column>
+    <property name="text">
+     <string>Author</string>
+    </property>
+   </column>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>250</y>
+     <width>49</width>
+     <height>16</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+>>>>>>> 8ebcc085e04c8c15b2b9db87748e3ee4155b2177
    </property>
   </widget>
  </widget>
