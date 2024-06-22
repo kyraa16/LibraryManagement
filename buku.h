@@ -1,22 +1,22 @@
 #ifndef BUKU_H
 #define BUKU_H
 
-#include <QDialog>
+#include <QMainWindow>
 
 namespace Ui {
-class Buku;
+class buku;
 }
 
-class Buku : public QDialog
+class buku : public QMainWindow
 {
     Q_OBJECT
 
 public:
-    explicit Buku(QWidget *parent = nullptr);
-    ~Buku();
+    explicit buku(QWidget *parent = nullptr);
+    ~buku();
 
 private:
-    Ui::Buku *ui;
+    Ui::buku *ui;
 };
 
 #endif // BUKU_H

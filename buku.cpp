@@ -1,14 +1,16 @@
 #include "buku.h"
 #include "ui_buku.h"
-
-Buku::Buku(QWidget *parent)
-    : QDialog(parent)
-    , ui(new Ui::Buku)
+#include <QPixmap>
+buku::buku(QWidget *parent)
+    : QMainWindow(parent)
+    , ui(new Ui::buku)
 {
     ui->setupUi(this);
+    QPixmap pix("C:/Users/kadek/Documents/LibraryManagement/pic2.jpg");
+    ui->pic2->setPixmap(pix);
 }
 
-Buku::~Buku()
+buku::~buku()
 {
     delete ui;
 }
