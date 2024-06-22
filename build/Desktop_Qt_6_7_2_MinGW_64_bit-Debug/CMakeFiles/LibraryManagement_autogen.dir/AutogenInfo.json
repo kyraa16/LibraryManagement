@@ -248,7 +248,8 @@
 		"C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets.cmake",
 		"C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginTargets-relwithdebinfo.cmake",
 		"C:/Qt/6.7.2/mingw_64/lib/cmake/Qt6Widgets/Qt6QModernWindowsStylePluginAdditionalTargetInfo.cmake",
-		"C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/GNUInstallDirs.cmake"
+		"C:/Qt/Tools/CMake_64/share/cmake-3.29/Modules/GNUInstallDirs.cmake",
+		"C:/Users/kadek/Documents/LibraryManagement/library-assets.qrc"
 	],
 	"CMAKE_SOURCE_DIR" : "C:/Users/kadek/Documents/LibraryManagement",
 	"CROSS_CONFIG" : false,
@@ -256,6 +257,18 @@
 	"DEP_FILE_RULE_NAME" : "LibraryManagement_autogen/timestamp",
 	"HEADERS" : 
 	[
+		[
+			"C:/Users/kadek/Documents/LibraryManagement/buku.h",
+			"MU",
+			"EWIEGA46WW/moc_buku.cpp",
+			null
+		],
+		[
+			"C:/Users/kadek/Documents/LibraryManagement/bukubaru.h",
+			"MU",
+			"EWIEGA46WW/moc_bukubaru.cpp",
+			null
+		],
 		[
 			"C:/Users/kadek/Documents/LibraryManagement/library.h",
 			"MU",
@@ -340,6 +353,8 @@
 	"SETTINGS_FILE" : "C:/Users/kadek/Documents/LibraryManagement/build/Desktop_Qt_6_7_2_MinGW_64_bit-Debug/CMakeFiles/LibraryManagement_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "C:/Users/kadek/Documents/LibraryManagement/buku.cpp", "MU", null ],
+		[ "C:/Users/kadek/Documents/LibraryManagement/bukubaru.cpp", "MU", null ],
 		[ "C:/Users/kadek/Documents/LibraryManagement/library.cpp", "MU", null ],
 		[ "C:/Users/kadek/Documents/LibraryManagement/main.cpp", "MU", null ],
 		[

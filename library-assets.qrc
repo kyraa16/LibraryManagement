@@ -4,4 +4,7 @@
         <file>8832880.png</file>
         <file>8832880 (1).png</file>
     </qresource>
+    <qresource prefix="/">
+        <file>pic2.jpg</file>
+    </qresource>
 </RCC>
