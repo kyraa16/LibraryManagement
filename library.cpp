@@ -1,5 +1,8 @@
 #include "library.h"
+#include "peminjaman.h"
 #include "./ui_library.h"
+#include "buku.h"
+#include<QDebug>
 
 Library::Library(QWidget *parent)
     : QMainWindow(parent)
@@ -13,3 +16,18 @@ Library::~Library()
 {
     delete ui;
 }
+
+void Library::on_bukuButton_clicked()
+{
+    qInfo()<<"Buku";
+    b.show();
+    this->close();
+}
+
+void Library::on_peminjamanButton_clicked()
+{
+    qInfo()<<"Peminjaman";
+    p.show();
+    this->close();
+}
+

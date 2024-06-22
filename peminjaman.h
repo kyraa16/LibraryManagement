@@ -1,13 +1,13 @@
 #ifndef PEMINJAMAN_H
 #define PEMINJAMAN_H
 
-#include <QDialog>
+#include <QMainWindow>
 
 namespace Ui {
 class peminjaman;
 }
 
-class peminjaman : public QDialog
+class peminjaman : public QMainWindow
 {
     Q_OBJECT
 
