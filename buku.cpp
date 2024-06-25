@@ -6,8 +6,6 @@ buku::buku(QWidget *parent)
     , ui(new Ui::buku)
 {
     ui->setupUi(this);
-    QPixmap pix("C:/Users/kadek/Documents/LibraryManagement/pic2.jpg");
-    ui->pic2->setPixmap(pix);
 }
 
 buku::~buku()
