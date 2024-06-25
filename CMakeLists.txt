@@ -29,6 +29,12 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         buku.h buku.cpp buku.ui
         peminjaman.h peminjaman.cpp peminjaman.ui
         bukubaru.h bukubaru.cpp bukubaru.ui
+        caribuku.h caribuku.cpp caribuku.ui
+        listpeminjaman.h listpeminjaman.cpp listpeminjaman.ui
+        inputpeminjaman.h inputpeminjaman.cpp inputpeminjaman.ui
+        anggota.h anggota.cpp anggota.ui
+        inputanggota.h inputanggota.cpp inputanggota.ui
+
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET LibraryManagement APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

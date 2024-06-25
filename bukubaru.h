@@ -2,6 +2,7 @@
 #define BUKUBARU_H
 
 #include <QMainWindow>
+// #include "buku.h"
 
 namespace Ui {
 class bukuBaru;
@@ -15,8 +16,11 @@ public:
     explicit bukuBaru(QWidget *parent = nullptr);
     ~bukuBaru();
 
+private slots:
+
 private:
     Ui::bukuBaru *ui;
+    // buku back;
 };
 
 #endif // BUKUBARU_H

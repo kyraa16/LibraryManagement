@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "buku.h"
 #include "peminjaman.h"
+#include "anggota.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -24,9 +25,12 @@ private slots:
 
     void on_peminjamanButton_clicked();
 
+    void on_anggota_clicked();
+
 private:
     Ui::Library *ui;
     buku b;
     peminjaman p;
+    anggota a;
 };
 #endif // LIBRARY_H
