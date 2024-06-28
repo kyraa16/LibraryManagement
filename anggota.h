@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "inputanggota.h"
+#include "databuku.h"
 
 namespace Ui {
 class anggota;
@@ -13,15 +14,21 @@ class anggota : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit anggota(QWidget *parent = nullptr);
+    explicit anggota(DataBuku *data, QWidget *parent = nullptr);
     ~anggota();
 
 private slots:
     void on_anggotaBaru_clicked();
 
+    void on_anggotaLibrary_clicked();
+
+    void on_anggotaBuku_clicked();
+
+    void on_anggotaPeminjaman_clicked();
+
 private:
     Ui::anggota *ui;
-    inputAnggota ia;
+    DataBuku *dataBuku;
 };
 
 #endif // ANGGOTA_H

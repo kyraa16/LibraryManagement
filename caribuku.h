@@ -2,6 +2,7 @@
 #define CARIBUKU_H
 
 #include <QMainWindow>
+//Ga kepake
 
 namespace Ui {
 class cariBuku;

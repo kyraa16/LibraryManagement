@@ -34,6 +34,9 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         inputpeminjaman.h inputpeminjaman.cpp inputpeminjaman.ui
         anggota.h anggota.cpp anggota.ui
         inputanggota.h inputanggota.cpp inputanggota.ui
+        databuku.h databuku.cpp
+        datapeminjaman.h datapeminjaman.cpp
+
 
     )
 # Define target properties for Android with Qt 6 as:
