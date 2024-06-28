@@ -7,33 +7,92 @@
     <x>0</x>
     <y>0</y>
     <width>836</width>
-    <height>524</height>
+    <height>480</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="pic2">
+   <widget class="QLineEdit" name="searchInput">
     <property name="geometry">
      <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>841</width>
-      <height>481</height>
+      <x>360</x>
+      <y>120</y>
+      <width>271</width>
+      <height>21</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="searchButton">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>120</y>
+      <width>61</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cari</string>
+    </property>
+   </widget>
+   <widget class="QTableWidget" name="tableWidget">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>150</y>
+      <width>521</width>
+      <height>291</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>350</x>
+      <y>70</y>
+      <width>91</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>SF Pro Bold</family>
+      <pointsize>16</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>List Buku</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bukuBaru">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>120</y>
+      <width>71</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Buku Baru</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>180</y>
+      <width>49</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
-    <property name="pixmap">
-     <pixmap resource="library-assets.qrc">:/image1/pic2.png</pixmap>
-    </property>
-    <property name="scaledContents">
-     <bool>true</bool>
-    </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_6">
+   <widget class="QPushButton" name="pushButton_2">
     <property name="geometry">
      <rect>
       <x>20</x>
@@ -43,63 +102,38 @@
      </rect>
     </property>
     <property name="text">
-     <string>Home </string>
+     <string>Home</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="peminjaman2">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>290</y>
-      <width>141</width>
-      <height>71</height>
+      <x>120</x>
+      <y>20</y>
+      <width>80</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Show All Books</string>
+     <string>Peminjaman</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="anggota2">
     <property name="geometry">
      <rect>
-      <x>620</x>
-      <y>200</y>
-      <width>141</width>
-      <height>71</height>
+      <x>220</x>
+      <y>20</y>
+      <width>80</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Cari Buku</string>
+     <string>Anggota</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>620</x>
-      <y>110</y>
-      <width>141</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Buku Baru</string>
-    </property>
-   </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>836</width>
-     <height>22</height>
-    </rect>
-   </property>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
- <resources>
-  <include location="library-assets.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

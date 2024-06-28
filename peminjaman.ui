@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>850</width>
-    <height>501</height>
+    <width>903</width>
+    <height>547</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -18,9 +18,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>0</y>
-      <width>851</width>
-      <height>471</height>
+      <y>-20</y>
+      <width>901</width>
+      <height>541</height>
      </rect>
     </property>
     <property name="text">
@@ -33,24 +33,11 @@
      <bool>true</bool>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton">
+   <widget class="QPushButton" name="pinjamBuku">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>20</y>
-      <width>80</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Home</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton_2">
-    <property name="geometry">
-     <rect>
-      <x>610</x>
-      <y>60</y>
+      <x>640</x>
+      <y>180</y>
       <width>141</width>
       <height>71</height>
      </rect>
@@ -59,11 +46,11 @@
      <string>Pinjam Buku</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_4">
+   <widget class="QPushButton" name="listPinjam">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>240</y>
+      <x>640</x>
+      <y>290</y>
       <width>141</width>
       <height>71</height>
      </rect>
@@ -72,30 +59,43 @@
      <string>List Peminjaman</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_5">
+   <widget class="QPushButton" name="back2">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>330</y>
-      <width>141</width>
-      <height>71</height>
+      <x>70</x>
+      <y>40</y>
+      <width>80</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>List Pengembalian</string>
+     <string>Home</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="pushButton_3">
+   <widget class="QPushButton" name="peminjamanBuku">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>150</y>
-      <width>141</width>
-      <height>71</height>
+      <x>170</x>
+      <y>40</y>
+      <width>80</width>
+      <height>24</height>
      </rect>
     </property>
     <property name="text">
-     <string>Pengembalian Buku</string>
+     <string>Buku</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="peminjamanAnggota">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>40</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Anggota</string>
     </property>
    </widget>
   </widget>
@@ -104,8 +104,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>850</width>
-     <height>22</height>
+     <width>903</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
