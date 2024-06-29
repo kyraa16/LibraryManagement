@@ -20,19 +20,25 @@ public:
     ~anggota();
 
 private slots:
+    void on_anggotaBuku_clicked();
+    void on_anggotaLibrary_clicked();
+    void on_anggotaPeminjaman_clicked();
+    void refreshTable();
+    void handleButtonDelete(QString nim);
     void on_anggotaBaru_clicked();
 
-    void on_anggotaLibrary_clicked();
+    void on_cariAnggota_clicked();
 
-    void on_anggotaBuku_clicked();
-
-    void on_anggotaPeminjaman_clicked();
+    void on_tableWidget_cellChanged(int row, int column);
 
 private:
     Ui::anggota *ui;
     DataBuku *dataBuku;
     DataPeminjaman *dataPeminjaman;
     DataAnggota *dataAnggota;
+    QString searchQuery;
+
+    bool finishRenderTable;
 };
 
 #endif // ANGGOTA_H

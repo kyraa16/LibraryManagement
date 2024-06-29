@@ -6,8 +6,9 @@
 #include "databuku.h"
 #include "datapeminjaman.h"
 #include "dataanggota.h"
+#include "inputanggota.h"
 
-anggota::anggota(DataBuku *data, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent)
+anggota::anggota(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::anggota)
 {
@@ -15,6 +16,13 @@ anggota::anggota(DataBuku *data, DataPeminjaman *dataPeminjaman, DataAnggota *da
     this->dataBuku = dataBuku;
     this->dataPeminjaman = dataPeminjaman;
     this->dataAnggota = dataAnggota;
+
+    ui->tableWidget->setColumnCount(3);
+    QStringList columnNames;
+    columnNames<<"Nama Anggota"<<"NIM"<<"Aksi";
+    ui->tableWidget->setRowCount(10);
+    ui->tableWidget->setHorizontalHeaderLabels(columnNames);
+    refreshTable();
 }
 
 anggota::~anggota()
@@ -22,11 +30,46 @@ anggota::~anggota()
     delete ui;
 }
 
-void anggota::on_anggotaBaru_clicked()
+void anggota::refreshTable()
 {
-    inputAnggota *ia = new inputAnggota(dataBuku, dataPeminjaman, dataAnggota);
-    ia->show();
-    ia->setGeometry(300, 150, 900, 600);
+    // searchResult = dataMhs->head;
+    struct Anggota *anggota = this->dataAnggota->head;
+    int i = 0;
+    ui->tableWidget->setRowCount(this->dataBuku->count-1);
+    QTableWidget *currentTable = ui->tableWidget;
+    while (anggota != NULL) {
+        if (anggota->nim == searchQuery || searchQuery == "") {
+            QTableWidgetItem* item = new QTableWidgetItem();
+            item->setText(anggota->nama);
+            ui->tableWidget->setItem(i, 0, item);
+            QTableWidgetItem* item2 = new QTableWidgetItem();
+            item2->setText(anggota->nim);
+            ui->tableWidget->setItem(i, 1, item2);
+
+            QPushButton *btn_delete;
+            btn_delete = new QPushButton();
+            btn_delete->setText("Delete");
+            connect(btn_delete, &QPushButton::released, this,
+                    [this, anggota]()
+                    {
+                        // handleButtonDelete(i);
+                        handleButtonDelete(anggota->nim);
+                    });
+            ui->tableWidget->setCellWidget(i,2,(QWidget*)btn_delete);
+
+            i++;
+        }
+        anggota = anggota->next;
+    }
+    ui->tableWidget->setRowCount(i);
+    finishRenderTable = true;
+    qInfo()<<i;
+}
+
+void anggota::handleButtonDelete(QString nim) {
+    Anggota *temp = dataAnggota->head;
+    dataAnggota->deleteData(nim);
+    refreshTable();
 }
 
 
@@ -47,12 +90,36 @@ void anggota::on_anggotaBuku_clicked()
     this->close();
 }
 
-
 void anggota::on_anggotaPeminjaman_clicked()
 {
     peminjaman *anggotaPeminjaman = new peminjaman(dataBuku, dataPeminjaman, dataAnggota);
     anggotaPeminjaman->show();
     anggotaPeminjaman->setGeometry(300, 150, 900, 600);
     this->close();
+}
+
+void anggota::on_anggotaBaru_clicked()
+{
+    qInfo()<<"anggotaBaru";
+    inputAnggota *anggotaBaru = new inputAnggota(dataBuku, dataPeminjaman, dataAnggota);
+    anggotaBaru->show();
+    anggotaBaru->setGeometry(300, 150, 900, 600);
+    this->close();
+}
+
+void anggota::on_cariAnggota_clicked()
+{
+    this->searchQuery = ui->searchAnggota->text();
+    refreshTable();
+}
+
+
+void anggota::on_tableWidget_cellChanged(int row, int column)
+{
+    if (finishRenderTable) {
+        int i = 0;
+        QString val = ui->tableWidget->item(row, column)->text();
+        dataAnggota->updateData(row, column, val);
+    }
 }
 

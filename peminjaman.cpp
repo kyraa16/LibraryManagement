@@ -30,6 +30,7 @@ void peminjaman::on_listPinjam_clicked()
     listPeminjaman *lp = new listPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
     lp->setGeometry(300, 150, 900, 600);
     lp->show();
+    this->close();
 }
 
 void peminjaman::on_pinjamBuku_clicked()
@@ -37,6 +38,7 @@ void peminjaman::on_pinjamBuku_clicked()
     buku *pb = new buku(dataBuku, dataPeminjaman, dataAnggota);
     pb->show();
     pb->setGeometry(300, 150, 900, 600);
+    this->close();
 }
 
 void peminjaman::on_back2_clicked()
