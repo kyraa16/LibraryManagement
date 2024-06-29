@@ -1,117 +1,144 @@
-// #include "datapeminjaman.h"
-// #include <QFile>
-// #include <QIODevice>
-// #include <QTextStream>
-// #include <QMessageBox>
-// #include <QDateTime>
+#include "datapeminjaman.h"
+#include <QFile>
+#include <QIODevice>
+#include <QTextStream>
+#include <QMessageBox>
+#include <QDateTime>
 
-// DataPeminjaman::DataPeminjaman(QObject *parent)
-//     : QObject{parent}
-// {}
+DataPeminjaman::DataPeminjaman(QObject *parent)
+    : QObject{parent}
+{
+    getData();
+}
 
-// void DataPeminjaman::getData()
-// {
-//     QFile file(filePath);
-//     if(!file.open(QIODevice::ReadOnly)) {
-//         QMessageBox::information(0, "error", file.errorString());
-//     }
-//     QTextStream in(&file);
-//     int c = 1;
-//     struct Peminjaman *currentHead = NULL, *temp = NULL;
-//     while(!in.atEnd()) {
-//         QString line = in.readLine();
-//         QStringList fields = line.split(",");
-//         if (currentHead == NULL) {
-//             currentHead = new Peminjaman();
-//             currentHead->id = fields[0].toInt();
-//             currentHead->nama = fields[1];
-//             currentHead->judulBuku = fields[2];
-//             currentHead->idBuku = fields[3].toInt();
-//             currentHead->next = NULL;
-//             currentHead->prev = NULL;
-//             temp = currentHead;
-//         } else {
-//             struct Peminjaman *node = new Buku();
-//             qInfo()<<fields[0];
-//             node->id = fields[0].toInt();
-//             node->judul = fields[1];
-//             node->penerbit = fields[2];
-//             node->author = fields[3];
-//             node->next = NULL;
-//             node->prev = temp;
-//             temp->next = node;
-//             temp = node;
-//         }
-//         c++;
-//     }
-//     file.close();
-//     head = currentHead;
-//     count = c;
-// }
+void DataPeminjaman::getData()
+{
+    QFile file(filePath);
+    if(!file.open(QIODevice::ReadOnly)) {
+        QMessageBox::information(0, "error", file.errorString());
+    }
+    QTextStream in(&file);
+    int c = 1;
+    bool isThereChange = false;
+    struct Peminjaman *currentHead = NULL, *temp = NULL;
+    while(!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList fields = line.split(",");
+        struct Peminjaman *node = new Peminjaman();
+        qInfo()<<fields[0];
+        node->id = fields[0].toInt();
+        node->nama = fields[1];
+        node->judulBuku = fields[2];
+        node->idBuku = fields[3].toInt();
+        node->waktuPengembalian = QDateTime::fromString(fields[4], timeFormat);
+        if (fields[5] != "Dikembalikan" && node->waktuPengembalian < QDateTime::currentDateTime()) {
+            node->status = "Lewat Batas Waktu";
+            isThereChange = true;
+        }
+        else
+            node->status = fields[5];
+        node->next = NULL;
 
-// void DataPeminjaman::createBuku(QString judul, QString penerbit, QString author)
-// {
-//     Buku *bukuBaru = new Buku();
-//     bukuBaru->id = QDateTime::currentSecsSinceEpoch();
-//     bukuBaru->judul = judul;
-//     bukuBaru->penerbit = penerbit;
-//     bukuBaru->author = author;
-//     bukuBaru->next = head;
-//     bukuBaru->prev = NULL;
-//     head->prev = bukuBaru;
-//     head = bukuBaru;
-//     count++;
-//     QFile file(filePath);
-//     QString str = "";
-//     Buku *temp = head;
-//     int i = 0;
-//     if(file.open(QIODevice::ReadWrite)) {
-//         // qInfo()<<str;
-//         // file.write(str.toUtf8());
-//         QTextStream out(&file);
-//         while (temp != NULL) {
-//             out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
-//             temp = temp->next;
-//             i++;
-//         }
-//     } else {
-//         QMessageBox::information(0, "error", file.errorString());
-//     }
-//     file.close();
-// }
+        if (currentHead == NULL) {
+            temp = currentHead = node;
+            currentHead->prev = NULL;
+        } else {
+            node->prev = temp;
+            temp->next = node;
+            temp = node;
+        }
+        // if (currentHead == NULL) {
+        //     currentHead = new Peminjaman();
+        //     currentHead->id = fields[0].toInt();
+        //     currentHead->nama = fields[1];
+        //     currentHead->judulBuku = fields[2];
+        //     currentHead->idBuku = fields[3].toInt();
+        //     currentHead->waktuPengembalian = QDateTime::fromString(fields[4], timeFormat);
+        //     if (fields[5] != "Dikembalikan" && currentHead->waktuPengembalian < QDateTime::currentDateTime())
+        //         currentHead->status = "Lewat Batas Waktu";
+        //     else
+        //         currentHead->status = fields[5];
+        //     currentHead->next = NULL;
+        //     currentHead->prev = NULL;
+        //     temp = currentHead;
+        // } else {
+        //     struct Peminjaman *node = new Peminjaman();
+        //     qInfo()<<fields[0];
+        //     node->id = fields[0].toInt();
+        //     node->nama = fields[1];
+        //     node->judulBuku = fields[2];
+        //     node->idBuku = fields[3].toInt();
+        //     node->waktuPengembalian = QDateTime::fromString(fields[4], timeFormat);
+        //     if (fields[5] != "Dikembalikan" && node->waktuPengembalian < QDateTime::currentDateTime())
+        //         node->status = "Lewat Batas Waktu";
+        //     else
+        //         node->status = fields[5];
+        //     node->next = NULL;
+        //     node->prev = temp;
+        //     temp->next = node;
+        //     temp = node;
+        // }
+        c++;
+    }
+    file.close();
+    head = currentHead;
+    count = c;
+    if (isThereChange)
+        refreshData();
+}
 
-// void DataPeminjaman::updateBuku(int row, int col, QString value)
-// {
-//     QFile file(filePath);
-//     QString str = "";
-//     Buku *temp = head;
-//     int i = 0;
-//     if(file.open(QIODevice::ReadWrite)) {
-//         // qInfo()<<str;
-//         // file.write(str.toUtf8());
-//         QTextStream out(&file);
-//         while (temp != NULL) {
-//             if (i == row) {
-//                 if (col == 1)
-//                     temp->judul = value;
-//                 else if (col == 2)
-//                     temp->penerbit = value;
-//                 else if (col == 3)
-//                     temp->author = value;
-//             }
-//             // str += QString::number(temp->id) + "," + temp->judul + "," + temp->penerbit + "," + temp->author + "\n";
-//             out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
-//             temp = temp->next;
-//             i++;
-//         }
-//     } else {
-//         QMessageBox::information(0, "error", file.errorString());
-//     }
-//     file.close();
-// }
+void DataPeminjaman::createData(QString nama, QString judulBuku, int idBuku)
+{
+    Peminjaman *peminjamanBaru = new Peminjaman();
+    peminjamanBaru->id = QDateTime::currentSecsSinceEpoch();
+    peminjamanBaru->nama = nama;
+    peminjamanBaru->judulBuku = judulBuku;
+    peminjamanBaru->idBuku = idBuku;
+    peminjamanBaru->status = "Sedang Dipinjam";
+    peminjamanBaru->waktuPengembalian = QDate::currentDate().addDays(60).endOfDay();
+    peminjamanBaru->next = head;
+    peminjamanBaru->prev = NULL;
+    head->prev = peminjamanBaru;
+    head = peminjamanBaru;
+    count++;
+    QFile file(filePath);
+    QString str = "";
+    Peminjaman *temp = head;
+    int i = 0;
+    if(file.open(QIODevice::ReadWrite)) {
+        QTextStream out(&file);
+        while (temp != NULL) {
+            out<<QString::number(temp->id)<<","<<temp->nama<<","<<temp->judulBuku<<","<<temp->idBuku<<","<<temp->waktuPengembalian.toString(timeFormat)<<","<<temp->status<<"\n";
+            temp = temp->next;
+            i++;
+        }
+    } else {
+        QMessageBox::information(0, "error", file.errorString());
+    }
+    file.close();
+}
 
-// void DataPeminjaman::deleteBuku(int id) {
-//     Buku *temp = head, *hapus;
+void DataPeminjaman::refreshData()
+{
+    QFile file(filePath);
+    QString str = "";
+    Peminjaman *temp = head;
+    int i = 0;
+    if(file.open(QIODevice::ReadWrite)) {
+        QTextStream out(&file);
+        while (temp != NULL) {
+            out<<QString::number(temp->id)<<","<<temp->nama<<","<<temp->judulBuku<<","<<temp->idBuku<<","<<temp->waktuPengembalian.toString(timeFormat)<<","<<temp->status<<"\n";
+            temp = temp->next;
+            i++;
+        }
+    } else {
+        QMessageBox::information(0, "error", file.errorString());
+    }
+    file.close();
+}
+
+// void DataPeminjaman::deleteData(int id) {
+//     Peminjaman *temp = head, *hapus;
 //     int i = 0, deletedIndex = 0;
 //     bool deleted = false;
 //     // if (temp->nim == nim) {
@@ -149,7 +176,7 @@
 //                 count--;
 //                 deleted = true;
 //             } else {
-//                 out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
+//                 out<<QString::number(temp->id)<<","<<temp->nama<<","<<temp->judulBuku<<","<<temp->idBuku<<","<<temp->waktuPengembalian.toString(timeFormat)<<","<<temp->status<<"\n";
 //                 temp = temp->next;
 //             }
 //             deletedIndex += deleted ? 0 : 1;
@@ -162,3 +189,27 @@
 //     // return deletedIndex;
 //     // cetakData();
 // }
+
+void DataPeminjaman::returnBook(int id)
+{
+    QFile file(filePath);
+    QString str = "";
+    Peminjaman *temp = head;
+    int i = 0;
+    if(file.open(QIODevice::ReadWrite)) {
+        QTextStream out(&file);
+        while (temp != NULL) {
+            out<<"";
+            if (temp->id == id) {
+                temp->status = "Dikembalikan";
+                temp->waktuPengembalian = QDateTime::currentDateTime();
+            }
+            out<<QString::number(temp->id)<<","<<temp->nama<<","<<temp->judulBuku<<","<<QString::number(temp->idBuku)<<","<<temp->waktuPengembalian.toString(timeFormat)<<","<<temp->status<<"\n";
+            temp = temp->next;
+            i++;
+        }
+    } else {
+        QMessageBox::information(0, "error", file.errorString());
+    }
+    file.close();
+}

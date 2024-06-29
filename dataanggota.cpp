@@ -1,4 +1,4 @@
-#include "databuku.h"
+#include "dataanggota.h"
 #include <QDebug>
 #include <QFile>
 #include <QIODevice>
@@ -6,13 +6,13 @@
 #include <QMessageBox>
 #include <QDateTime>
 
-DataBuku::DataBuku(QObject *parent)
+DataAnggota::DataAnggota(QObject *parent)
     : QObject{parent}
 {
-    this->getData();
+    getData();
 }
 
-void DataBuku::getData()
+void DataAnggota::getData()
 {
     QFile file(filePath);
     if(!file.open(QIODevice::ReadOnly)) {
@@ -20,26 +20,21 @@ void DataBuku::getData()
     }
     QTextStream in(&file);
     int c = 1;
-    struct Buku *currentHead = NULL, *temp = NULL;
+    struct Anggota *currentHead = NULL, *temp = NULL;
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList fields = line.split(",");
         if (currentHead == NULL) {
-            currentHead = new Buku();
-            currentHead->id = fields[0].toInt();
-            currentHead->judul = fields[1];
-            currentHead->penerbit = fields[2];
-            currentHead->author = fields[3];
+            currentHead = new Anggota();
+            currentHead->nama = fields[0];
+            currentHead->nim = fields[1];
             currentHead->next = NULL;
             currentHead->prev = NULL;
             temp = currentHead;
         } else {
-            struct Buku *node = new Buku();
-            qInfo()<<fields[0];
-            node->id = fields[0].toInt();
-            node->judul = fields[1];
-            node->penerbit = fields[2];
-            node->author = fields[3];
+            struct Anggota *node = new Anggota();
+            node->nama = fields[0];
+            node->nim = fields[1];
             node->next = NULL;
             node->prev = temp;
             temp->next = node;
@@ -52,28 +47,26 @@ void DataBuku::getData()
     count = c;
 }
 
-void DataBuku::createData(QString judul, QString penerbit, QString author)
+void DataAnggota::createData(QString nama, QString nim)
 {
-    Buku *bukuBaru = new Buku();
-    bukuBaru->id = QDateTime::currentSecsSinceEpoch();
-    bukuBaru->judul = judul;
-    bukuBaru->penerbit = penerbit;
-    bukuBaru->author = author;
-    bukuBaru->next = head;
-    bukuBaru->prev = NULL;
-    head->prev = bukuBaru;
-    head = bukuBaru;
+    Anggota *anggotaBaru = new Anggota();
+    anggotaBaru->nama = nama;
+    anggotaBaru->nim = nim;
+    anggotaBaru->next = head;
+    anggotaBaru->prev = NULL;
+    head->prev = anggotaBaru;
+    head = anggotaBaru;
     count++;
     QFile file(filePath);
     QString str = "";
-    Buku *temp = head;
+    Anggota *temp = head;
     int i = 0;
     if(file.open(QIODevice::ReadWrite)) {
         // qInfo()<<str;
         // file.write(str.toUtf8());
         QTextStream out(&file);
         while (temp != NULL) {
-            out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
+            out<<temp->nama<<","<<temp->nim<<"\n";
             temp = temp->next;
             i++;
         }
@@ -83,11 +76,11 @@ void DataBuku::createData(QString judul, QString penerbit, QString author)
     file.close();
 }
 
-void DataBuku::updateData(int row, int col, QString value)
+void DataAnggota::updateData(int row, int col, QString value)
 {
     QFile file(filePath);
     QString str = "";
-    Buku *temp = head;
+    Anggota *temp = head;
     int i = 0;
     if(file.open(QIODevice::ReadWrite)) {
         // qInfo()<<str;
@@ -95,15 +88,13 @@ void DataBuku::updateData(int row, int col, QString value)
         QTextStream out(&file);
         while (temp != NULL) {
             if (i == row) {
-                if (col == 1)
-                    temp->judul = value;
-                else if (col == 2)
-                    temp->penerbit = value;
-                else if (col == 3)
-                    temp->author = value;
+                if (col == 0)
+                    temp->nama = value;
+                else if (col == 1)
+                    temp->nim = value;
             }
             // str += QString::number(temp->id) + "," + temp->judul + "," + temp->penerbit + "," + temp->author + "\n";
-            out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
+            out<<temp->nama<<","<<temp->nim<<"\n";
             temp = temp->next;
             i++;
         }
@@ -113,8 +104,8 @@ void DataBuku::updateData(int row, int col, QString value)
     file.close();
 }
 
-void DataBuku::deleteData(int id) {
-    Buku *temp = head, *hapus;
+void DataAnggota::deleteData(QString nim) {
+    Anggota *temp = head, *hapus;
     int i = 0, deletedIndex = 0;
     bool deleted = false;
     // if (temp->nim == nim) {
@@ -130,7 +121,7 @@ void DataBuku::deleteData(int id) {
         QTextStream out(&file);
         // out<<str;
         while (temp != NULL) {
-            if (temp->id == id) {
+            if (temp->nim == nim) {
                 // qInfo()<<nim;
                 if (temp == head) {
                     hapus = temp;
@@ -152,7 +143,7 @@ void DataBuku::deleteData(int id) {
                 count--;
                 deleted = true;
             } else {
-                out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
+                out<<temp->nama<<","<<temp->nim<<"\n";
                 temp = temp->next;
             }
             deletedIndex += deleted ? 0 : 1;

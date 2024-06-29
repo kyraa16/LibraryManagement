@@ -6,6 +6,8 @@
 #include "peminjaman.h"
 #include "anggota.h"
 #include "databuku.h"
+#include "datapeminjaman.h"
+#include "dataanggota.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -30,7 +32,8 @@ private slots:
 
 private:
     Ui::Library *ui;
-   
     DataBuku *dataBuku;
+    DataPeminjaman *dataPeminjaman;
+    DataAnggota *dataAnggota;
 };
 #endif // LIBRARY_H

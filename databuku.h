@@ -10,7 +10,7 @@ struct Buku {
     QString author;
     struct Buku *next;
     struct Buku *prev;
-    Buku(){};
+    Buku(){}
 };
 
 class DataBuku : public QObject
@@ -19,12 +19,12 @@ class DataBuku : public QObject
 public:
     explicit DataBuku(QObject *parent = nullptr);
     Buku *head;
-    QString filePath = "C:/Users/kadek/Documents/LibraryManagement/data-buku.txt";
+    QString filePath = "C:/Made Aditya/Sublime Text/Belajar C - C++/qt-app/LibraryManagement/data-buku.txt";
     int count;
     void getData();
-    void createBuku(QString judul, QString penerbit, QString author);
-    void updateBuku(int row, int col, QString value);
-    void deleteBuku(int id);
+    void createData(QString judul, QString penerbit, QString author);
+    void updateData(int row, int col, QString value);
+    void deleteData(int id);
     void searchData(QString query);
 
 signals:

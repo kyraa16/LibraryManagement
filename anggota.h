@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include "inputanggota.h"
 #include "databuku.h"
+#include "datapeminjaman.h"
+#include "dataanggota.h"
 
 namespace Ui {
 class anggota;
@@ -14,7 +16,7 @@ class anggota : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit anggota(DataBuku *data, QWidget *parent = nullptr);
+    explicit anggota(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent = nullptr);
     ~anggota();
 
 private slots:
@@ -29,6 +31,8 @@ private slots:
 private:
     Ui::anggota *ui;
     DataBuku *dataBuku;
+    DataPeminjaman *dataPeminjaman;
+    DataAnggota *dataAnggota;
 };
 
 #endif // ANGGOTA_H

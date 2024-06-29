@@ -7,12 +7,19 @@
 #include "anggota.h"
 #include "databuku.h"
 #include "bukubaru.h"
+#include "datapeminjaman.h"
+#include "dataanggota.h"
+#include "inputpeminjaman.h"
+#include <QHBoxLayout>
+#include <QButtonGroup>
 
-buku::buku(DataBuku *data, QWidget *parent)
+buku::buku(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::buku)
 {
-    this->dataBuku = data;
+    this->dataBuku = dataBuku;
+    this->dataPeminjaman = dataPeminjaman;
+    this->dataAnggota = dataAnggota;
     // this->setGeometry(0,0,900,900);
     ui->setupUi(this);
     ui->tableWidget->setColumnCount(5);
@@ -49,16 +56,43 @@ void buku::refreshTable()
             QTableWidgetItem* item4 = new QTableWidgetItem();
             item4->setText(buku->author);
             ui->tableWidget->setItem(i, 3, item4);
-            QPushButton *btn_delete;
-            btn_delete = new QPushButton();
-            btn_delete->setText("Delete");
+            // QPushButton *btn_delete;
+            // btn_delete = new QPushButton();
+            // btn_delete->setText("Delete");
+            // connect(btn_delete, &QPushButton::released, this,
+            //         [this, buku]()
+            //         {
+            //             // handleButtonDelete(i);
+            //             handleButtonDelete(buku->id);
+            //         });
+            // ui->tableWidget->setCellWidget(i,4,(QWidget*)btn_delete);
+            QButtonGroup *buttonGroup = new QButtonGroup(this);
+            QPushButton *btn_pinjam = new QPushButton("Pinjam");
+            QPushButton *btn_delete = new QPushButton("Delete");
             connect(btn_delete, &QPushButton::released, this,
                     [this, buku]()
                     {
                         // handleButtonDelete(i);
                         handleButtonDelete(buku->id);
                     });
-            ui->tableWidget->setCellWidget(i,4,(QWidget*)btn_delete);
+            connect(btn_pinjam, &QPushButton::released, this,
+                    [this, buku]()
+                    {
+                        // handleButtonDelete(i);
+                        handleButtonPinjam(buku->id);
+                    });
+            // buttonGroup->addButton(btn_pinjam);
+            // buttonGroup->addButton(btn_delete);
+            QWidget *buttonWidget = new QWidget();
+            QHBoxLayout *layout = new QHBoxLayout(buttonWidget);
+            layout->addWidget(btn_pinjam);
+            layout->addWidget(btn_delete);
+            layout->setAlignment(Qt::AlignLeft);
+            layout->setSpacing(0);
+            layout->setContentsMargins(0, 0, 0, 0);
+            buttonWidget->setLayout(layout);
+            ui->tableWidget->setCellWidget(i, 4, buttonWidget);
+            ui->tableWidget->setColumnWidth(4,150);
             i++;
         }
         buku = buku->next;
@@ -70,7 +104,7 @@ void buku::refreshTable()
 
 void buku::on_bukuBaru_clicked()
 {
-    bukuBaru *b = new bukuBaru(dataBuku);
+    bukuBaru *b = new bukuBaru(dataBuku, dataPeminjaman, dataAnggota);
     b->show();
     b->setGeometry(300, 150, 900, 600);
     this->close();
@@ -78,7 +112,7 @@ void buku::on_bukuBaru_clicked()
 
 void buku::on_peminjaman_clicked()
 {
-    inputPeminjaman *p = new inputPeminjaman(dataBuku);
+    inputPeminjaman *p = new inputPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
     p->show();
     p->setGeometry(300, 150, 900, 600);
     this->close();
@@ -96,7 +130,7 @@ void buku::on_pushButton_2_clicked()
 
 void buku::on_peminjaman2_clicked()
 {
-    peminjaman *bukuPeminjaman = new peminjaman(dataBuku);
+    peminjaman *bukuPeminjaman = new peminjaman(dataBuku, dataPeminjaman, dataAnggota);
     bukuPeminjaman->show();
     bukuPeminjaman->setGeometry(300, 150, 900, 600);
     this->close();
@@ -105,7 +139,7 @@ void buku::on_peminjaman2_clicked()
 
 void buku::on_anggota2_clicked()
 {
-    anggota *bukuAnggota = new anggota(dataBuku);
+    anggota *bukuAnggota = new anggota(dataBuku, dataPeminjaman, dataAnggota);
     bukuAnggota->show();
     bukuAnggota->setGeometry(300, 150, 900, 600);
     this->close();
@@ -124,15 +158,19 @@ void buku::on_tableWidget_cellChanged(int row, int column)
     if (finishRenderTable) {
         int i = 0;
         QString val = ui->tableWidget->item(row, column)->text();
-        dataBuku->updateBuku(row, column, val);
+        dataBuku->updateData(row, column, val);
     }
 }
 
 void buku::handleButtonDelete(int id) {
-    int row = -1;
     Buku *temp = dataBuku->head;
-    dataBuku->deleteBuku(id);
+    dataBuku->deleteData(id);
     refreshTable();
-    // dataMhs->cetakData();
+}
+
+void buku::handleButtonPinjam(int id) {
+    inputPeminjaman *ip = new inputPeminjaman(dataBuku,dataPeminjaman,dataAnggota);
+    ip->show();
+    this->close();
 }
 

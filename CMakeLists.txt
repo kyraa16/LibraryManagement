@@ -36,6 +36,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         inputanggota.h inputanggota.cpp inputanggota.ui
         databuku.h databuku.cpp
         datapeminjaman.h datapeminjaman.cpp
+        dataanggota.h dataanggota.cpp
 
 
     )

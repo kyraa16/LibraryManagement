@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "databuku.h"
+#include "dataanggota.h"
+#include "datapeminjaman.h"
 
 namespace Ui {
 class inputPeminjaman;
@@ -13,12 +15,14 @@ class inputPeminjaman : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit inputPeminjaman(DataBuku *data, QWidget *parent = nullptr);
+    explicit inputPeminjaman(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent = nullptr);
     ~inputPeminjaman();
 
 private:
     Ui::inputPeminjaman *ui;
     DataBuku *dataBuku;
+    DataPeminjaman *dataPeminjaman;
+    DataAnggota *dataAnggota;
 };
 
 #endif // INPUTPEMINJAMAN_H
