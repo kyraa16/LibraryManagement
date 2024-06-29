@@ -282,6 +282,12 @@
 			null
 		],
 		[
+			"C:/Users/kadek/Documents/LibraryManagement/dataanggota.h",
+			"MU",
+			"EWIEGA46WW/moc_dataanggota.cpp",
+			null
+		],
+		[
 			"C:/Users/kadek/Documents/LibraryManagement/databuku.h",
 			"MU",
 			"EWIEGA46WW/moc_databuku.cpp",
@@ -399,6 +405,11 @@
 		[ "C:/Users/kadek/Documents/LibraryManagement/buku.cpp", "MU", null ],
 		[ "C:/Users/kadek/Documents/LibraryManagement/bukubaru.cpp", "MU", null ],
 		[ "C:/Users/kadek/Documents/LibraryManagement/caribuku.cpp", "MU", null ],
+		[
+			"C:/Users/kadek/Documents/LibraryManagement/dataanggota.cpp",
+			"MU",
+			null
+		],
 		[ "C:/Users/kadek/Documents/LibraryManagement/databuku.cpp", "MU", null ],
 		[
 			"C:/Users/kadek/Documents/LibraryManagement/datapeminjaman.cpp",
