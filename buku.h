@@ -5,6 +5,8 @@
 #include "bukubaru.h"
 #include "inputpeminjaman.h"
 #include "databuku.h"
+#include "datapeminjaman.h"
+#include "dataanggota.h"
 
 namespace Ui {
 class buku;
@@ -15,7 +17,7 @@ class buku : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit buku(DataBuku *dataBuku, QWidget *parent = nullptr);
+    explicit buku(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent = nullptr);
     ~buku();
 
 private slots:
@@ -33,10 +35,13 @@ private slots:
 
     void on_tableWidget_cellChanged(int row, int column);
     void handleButtonDelete(int id);
+    void handleButtonPinjam(int id);
 
 private:
     Ui::buku *ui;
     DataBuku *dataBuku;
+    DataPeminjaman *dataPeminjaman;
+    DataAnggota *dataAnggota;
     QString searchQuery;
     bool finishRenderTable;
 };

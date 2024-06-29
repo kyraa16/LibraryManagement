@@ -5,6 +5,8 @@
 #include "listpeminjaman.h"
 #include "buku.h"
 #include "databuku.h"
+#include "datapeminjaman.h"
+#include "dataanggota.h"
 
 namespace Ui {
 class peminjaman;
@@ -15,7 +17,7 @@ class peminjaman : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit peminjaman(DataBuku *data, QWidget *parent = nullptr);
+    explicit peminjaman(DataBuku *data, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent = nullptr);
     ~peminjaman();
 
 private slots:
@@ -33,6 +35,8 @@ private slots:
 private:
     Ui::peminjaman *ui;
     DataBuku *dataBuku;
+    DataPeminjaman *dataPeminjaman;
+    DataAnggota *dataAnggota;
 };
 
 #endif // PEMINJAMAN_H

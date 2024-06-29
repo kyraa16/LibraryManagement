@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include "databuku.h"
+#include "datapeminjaman.h"
+#include "dataanggota.h"
 
 namespace Ui {
 class bukuBaru;
@@ -13,7 +15,7 @@ class bukuBaru : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit bukuBaru(DataBuku *data, QWidget *parent = nullptr);
+    explicit bukuBaru(DataBuku *data, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent = nullptr);
     ~bukuBaru();
 
 private slots:
@@ -25,6 +27,8 @@ private slots:
 private:
     Ui::bukuBaru *ui;
     DataBuku *dataBuku;
+    DataPeminjaman *dataPeminjaman;
+    DataAnggota *dataAnggota;
 };
 
 #endif // BUKUBARU_H
