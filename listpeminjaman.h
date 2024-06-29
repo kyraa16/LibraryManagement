@@ -23,6 +23,8 @@ private slots:
     void on_tableWidget_cellChanged(int row, int column);
     void handleButtonReturn(int id);
 
+    void on_backPeminjaman_clicked();
+
 private:
     Ui::listPeminjaman *ui;
     DataBuku *dataBuku;

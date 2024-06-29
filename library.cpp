@@ -20,7 +20,8 @@ Library::Library(QWidget *parent)
     this->dataPeminjaman = dataPeminjaman;
     this->dataAnggota = dataAnggota;
     ui->setupUi(this);
-    ui->label->setGeometry(250, 100, 300, 300);
+    //ui->label->setGeometry(250, 100, 300, 300);
+
     // QDate now = QDate::currentDate().addDays(5);
     // QDateTime endDay = QDate::currentDate().endOfDay();
     // QString str = endDay.toString("yyyy-MM-dd HH:mm:ss");
@@ -59,5 +60,6 @@ void Library::on_anggota_clicked()
     anggota *a = new anggota(dataBuku, dataPeminjaman, dataAnggota);
     a->setGeometry(300, 150, 900, 600);
     a->show();
+    this->close();
 }
 

@@ -18,6 +18,11 @@ public:
     explicit inputAnggota(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent = nullptr);
     ~inputAnggota();
 
+private slots:
+    void on_confirmAnggota_rejected();
+
+    void on_confirmAnggota_accepted();
+
 private:
     Ui::inputAnggota *ui;
     DataBuku *dataBuku;

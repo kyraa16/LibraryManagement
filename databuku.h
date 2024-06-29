@@ -19,7 +19,7 @@ class DataBuku : public QObject
 public:
     explicit DataBuku(QObject *parent = nullptr);
     Buku *head;
-    QString filePath = "C:/Made Aditya/Sublime Text/Belajar C - C++/qt-app/LibraryManagement/data-buku.txt";
+    QString filePath = "C:/Users/kadek/Documents/LibraryManagement/data-buku.txt";
     int count;
     void getData();
     void createData(QString judul, QString penerbit, QString author);

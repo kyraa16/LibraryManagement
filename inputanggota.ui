@@ -39,10 +39,10 @@
       </widget>
      </item>
      <item row="0" column="1">
-      <widget class="QLineEdit" name="lineEdit_3"/>
+      <widget class="QLineEdit" name="inputNama"/>
      </item>
      <item row="1" column="1">
-      <widget class="QLineEdit" name="lineEdit_4"/>
+      <widget class="QLineEdit" name="inputNim"/>
      </item>
     </layout>
    </widget>
@@ -65,7 +65,7 @@
      <string>Anggota</string>
     </property>
    </widget>
-   <widget class="QDialogButtonBox" name="buttonBox">
+   <widget class="QDialogButtonBox" name="confirmAnggota">
     <property name="geometry">
      <rect>
       <x>420</x>

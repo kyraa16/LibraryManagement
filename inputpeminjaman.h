@@ -18,6 +18,9 @@ public:
     explicit inputPeminjaman(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent = nullptr);
     ~inputPeminjaman();
 
+private slots:
+    void on_confirmPeminjaman_rejected();
+
 private:
     Ui::inputPeminjaman *ui;
     DataBuku *dataBuku;

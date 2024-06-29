@@ -1,5 +1,6 @@
 #include "listpeminjaman.h"
 #include "ui_listpeminjaman.h"
+#include "peminjaman.h"
 #include "databuku.h"
 #include "datapeminjaman.h"
 #include "dataanggota.h"
@@ -83,5 +84,14 @@ void listPeminjaman::handleButtonReturn(int id) {
 void listPeminjaman::on_tableWidget_cellChanged(int row, int column)
 {
 
+}
+
+
+void listPeminjaman::on_backPeminjaman_clicked()
+{
+    peminjaman *backPeminjaman = new peminjaman(dataBuku, dataPeminjaman, dataAnggota);
+    backPeminjaman->show();
+    backPeminjaman->setGeometry(300, 150, 900, 600);
+    this->close();
 }
 

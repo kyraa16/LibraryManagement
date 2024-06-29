@@ -171,6 +171,7 @@ void buku::handleButtonDelete(int id) {
 void buku::handleButtonPinjam(int id) {
     inputPeminjaman *ip = new inputPeminjaman(dataBuku,dataPeminjaman,dataAnggota);
     ip->show();
+    ip->setGeometry(300, 150, 900, 600);
     this->close();
 }
 
