@@ -1,4 +1,4 @@
-1719596315,Made Adityaa,Buku 5,187438,2024-08-28 23:59:59,Sedang Dipinjam
+1719596315,Made Adityaa,Buku 5,187438,2024-06-30 10:03:01,Dikembalikan
 178989393,Aditya,Buku 1,178988229,2024-06-25 14:02:33,Lewat Batas Waktu
 178989394,Aditya,Buku 1,178988229,2024-06-25 17:18:20,Lewat Batas Waktu
 178989395,Aditya,Buku 1,178988229,2024-06-28 17:30:50,Dikembalikan
