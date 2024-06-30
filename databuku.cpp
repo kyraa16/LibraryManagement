@@ -1,4 +1,5 @@
 #include "databuku.h"
+#include "datapeminjaman.h"
 #include <QDebug>
 #include <QFile>
 #include <QIODevice>
@@ -61,7 +62,8 @@ void DataBuku::createData(QString judul, QString penerbit, QString author)
     bukuBaru->author = author;
     bukuBaru->next = head;
     bukuBaru->prev = NULL;
-    head->prev = bukuBaru;
+    if (head != NULL)
+        head->prev = bukuBaru;
     head = bukuBaru;
     count++;
     QFile file(filePath);
@@ -113,14 +115,10 @@ void DataBuku::updateData(int row, int col, QString value)
     file.close();
 }
 
-void DataBuku::deleteData(int id) {
+void DataBuku::deleteData(int id, DataPeminjaman *dataPeminjaman) {
     Buku *temp = head, *hapus;
     int i = 0, deletedIndex = 0;
     bool deleted = false;
-    // if (temp->nim == nim) {
-    //     qInfo()<<"Delete row : "<<nim.compare(temp->nim);
-    // }
-    // qInfo()<<"Delete row : "<<nim.compare(temp->nim);
     QFile file(filePath);
     QString str = "";
     if(file.open(QIODevice::WriteOnly)) {
@@ -132,6 +130,7 @@ void DataBuku::deleteData(int id) {
         while (temp != NULL) {
             if (temp->id == id) {
                 // qInfo()<<nim;
+                dataPeminjaman->deleteByBuku(temp->id);
                 if (temp == head) {
                     hapus = temp;
                     temp = head = head->next;

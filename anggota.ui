@@ -50,9 +50,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>160</x>
-      <y>60</y>
-      <width>570</width>
+      <x>280</x>
+      <y>80</y>
+      <width>321</width>
       <height>411</height>
      </rect>
     </property>
@@ -129,7 +129,7 @@
         <widget class="QLineEdit" name="searchAnggota">
          <property name="minimumSize">
           <size>
-           <width>200</width>
+           <width>0</width>
            <height>0</height>
           </size>
          </property>

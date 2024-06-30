@@ -2,6 +2,7 @@
 #define DATABUKU_H
 
 #include <QObject>
+#include "datapeminjaman.h"
 
 struct Buku {
     int id;
@@ -24,7 +25,7 @@ public:
     void getData();
     void createData(QString judul, QString penerbit, QString author);
     void updateData(int row, int col, QString value);
-    void deleteData(int id);
+    void deleteData(int id, DataPeminjaman *dataPeminjaman);
     void searchData(QString query);
 
 signals:

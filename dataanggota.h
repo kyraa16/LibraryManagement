@@ -2,6 +2,7 @@
 #define DATAANGGOTA_H
 
 #include <QObject>
+#include "datapeminjaman.h"
 
 struct Anggota {
     QString nama;
@@ -22,7 +23,7 @@ public:
     void getData();
     void createData(QString nama, QString nim);
     void updateData(int row, int col, QString value);
-    void deleteData(QString nim);
+    void deleteData(QString nim, DataPeminjaman *dataPeminjaman);
     void searchData(QString query);
 
 signals:

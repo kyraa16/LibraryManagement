@@ -54,7 +54,8 @@ void DataAnggota::createData(QString nama, QString nim)
     anggotaBaru->nim = nim;
     anggotaBaru->next = head;
     anggotaBaru->prev = NULL;
-    head->prev = anggotaBaru;
+    if (head != NULL)
+        head->prev = anggotaBaru;
     head = anggotaBaru;
     count++;
     QFile file(filePath);
@@ -104,7 +105,7 @@ void DataAnggota::updateData(int row, int col, QString value)
     file.close();
 }
 
-void DataAnggota::deleteData(QString nim) {
+void DataAnggota::deleteData(QString nim, DataPeminjaman *dataPeminjaman) {
     Anggota *temp = head, *hapus;
     int i = 0, deletedIndex = 0;
     bool deleted = false;
@@ -140,6 +141,7 @@ void DataAnggota::deleteData(QString nim) {
                     temp = temp->next;
                     delete hapus;
                 }
+                dataPeminjaman->deleteByAnggota(nim);
                 count--;
                 deleted = true;
             } else {
