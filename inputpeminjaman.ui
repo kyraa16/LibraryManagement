@@ -22,7 +22,7 @@
      <rect>
       <x>80</x>
       <y>40</y>
-      <width>738</width>
+      <width>809</width>
       <height>451</height>
      </rect>
     </property>
@@ -77,10 +77,10 @@
       </layout>
      </item>
      <item>
-      <widget class="QListView" name="listView"/>
+      <widget class="QTableWidget" name="tableWidget"/>
      </item>
      <item>
-      <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,0,0" rowminimumheight="30,30,30,30">
+      <layout class="QGridLayout" name="gridLayout" columnstretch="1,0,0,0">
        <property name="leftMargin">
         <number>5</number>
        </property>
@@ -93,20 +93,6 @@
        <property name="bottomMargin">
         <number>10</number>
        </property>
-       <item row="1" column="2">
-        <widget class="QLabel" name="judulBuku">
-         <property name="text">
-          <string>Text</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="label">
-         <property name="text">
-          <string>Nama Anggota  </string>
-         </property>
-        </widget>
-       </item>
        <item row="3" column="0">
         <widget class="QLabel" name="label_6">
          <property name="text">
@@ -114,31 +100,22 @@
          </property>
         </widget>
        </item>
-       <item row="2" column="0">
-        <widget class="QLabel" name="label_4">
-         <property name="text">
-          <string>ID Buku </string>
+       <item row="0" column="2">
+        <widget class="QLabel" name="namaAnggota">
+         <property name="minimumSize">
+          <size>
+           <width>500</width>
+           <height>20</height>
+          </size>
          </property>
-        </widget>
-       </item>
-       <item row="2" column="2">
-        <widget class="QLabel" name="idBuku">
-         <property name="text">
-          <string>Text</string>
+         <property name="maximumSize">
+          <size>
+           <width>200</width>
+           <height>20</height>
+          </size>
          </property>
-        </widget>
-       </item>
-       <item row="3" column="2">
-        <widget class="QLabel" name="waktuPengembalian">
          <property name="text">
-          <string>Text</string>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="0">
-        <widget class="QLabel" name="label_2">
-         <property name="text">
-          <string>Judul Buku </string>
+          <string>(Pilih anggota terlebih dahulu)</string>
          </property>
         </widget>
        </item>
@@ -155,6 +132,27 @@
          </property>
         </spacer>
        </item>
+       <item row="2" column="2">
+        <widget class="QLabel" name="idBuku">
+         <property name="text">
+          <string>Text</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="2">
+        <widget class="QLabel" name="judulBuku">
+         <property name="text">
+          <string>Text</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>ID Buku </string>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="3">
         <widget class="QPushButton" name="pilihAnggota">
          <property name="text">
@@ -162,22 +160,24 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="2">
-        <widget class="QLabel" name="label_5">
-         <property name="minimumSize">
-          <size>
-           <width>500</width>
-           <height>20</height>
-          </size>
-         </property>
-         <property name="maximumSize">
-          <size>
-           <width>200</width>
-           <height>20</height>
-          </size>
-         </property>
+       <item row="3" column="2">
+        <widget class="QLabel" name="waktuPengembalian">
          <property name="text">
           <string>Text</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>Nama Anggota  </string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>Judul Buku </string>
          </property>
         </widget>
        </item>
@@ -199,7 +199,7 @@
      <x>0</x>
      <y>0</y>
      <width>876</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

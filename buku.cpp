@@ -25,7 +25,7 @@ buku::buku(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *data
     ui->tableWidget->setColumnCount(5);
     QStringList columnNames;
     columnNames<<"ID"<<"Judul"<<"Penerbit"<<"Author"<<"Aksi";
-    ui->tableWidget->setRowCount(10);
+    // ui->tableWidget->setRowCount(10);
     ui->tableWidget->setHorizontalHeaderLabels(columnNames);
     refreshTable();
 }
@@ -40,7 +40,7 @@ void buku::refreshTable()
     // searchResult = dataMhs->head;
     struct Buku *buku = this->dataBuku->head;
     int i = 0;
-    ui->tableWidget->setRowCount(this->dataBuku->count-1);
+    ui->tableWidget->setRowCount(this->dataBuku->count);
     QTableWidget *currentTable = ui->tableWidget;
     while (buku != NULL) {
         if (buku->id == searchQuery.toInt() || searchQuery == "") {
@@ -79,7 +79,7 @@ void buku::refreshTable()
                     [this, buku]()
                     {
                         // handleButtonDelete(i);
-                        handleButtonPinjam(buku->id);
+                        handleButtonPinjam(buku);
                     });
             // buttonGroup->addButton(btn_pinjam);
             // buttonGroup->addButton(btn_delete);
@@ -112,10 +112,10 @@ void buku::on_bukuBaru_clicked()
 
 void buku::on_peminjaman_clicked()
 {
-    inputPeminjaman *p = new inputPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
-    p->show();
-    p->setGeometry(300, 150, 900, 600);
-    this->close();
+    // inputPeminjaman *p = new inputPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
+    // p->show();
+    // p->setGeometry(300, 150, 900, 600);
+    // this->close();
 }
 
 
@@ -164,12 +164,13 @@ void buku::on_tableWidget_cellChanged(int row, int column)
 
 void buku::handleButtonDelete(int id) {
     Buku *temp = dataBuku->head;
-    dataBuku->deleteData(id);
+    dataBuku->deleteData(id, dataPeminjaman);
     refreshTable();
 }
 
-void buku::handleButtonPinjam(int id) {
-    inputPeminjaman *ip = new inputPeminjaman(dataBuku,dataPeminjaman,dataAnggota);
+void buku::handleButtonPinjam(Buku *buku) {
+    qInfo()<<buku->judul;
+    inputPeminjaman *ip = new inputPeminjaman(buku, dataBuku,dataPeminjaman,dataAnggota);
     ip->show();
     ip->setGeometry(300, 150, 900, 600);
     this->close();

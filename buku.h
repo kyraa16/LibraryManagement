@@ -35,7 +35,7 @@ private slots:
 
     void on_tableWidget_cellChanged(int row, int column);
     void handleButtonDelete(int id);
-    void handleButtonPinjam(int id);
+    void handleButtonPinjam(Buku *buku);
 
 private:
     Ui::buku *ui;

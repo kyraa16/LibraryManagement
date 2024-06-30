@@ -5,6 +5,7 @@
 #include "databuku.h"
 #include "datapeminjaman.h"
 #include "dataanggota.h"
+#include <QPushButton>
 
 namespace Ui {
 class listPeminjaman;
@@ -20,8 +21,8 @@ public:
     void refreshTable();
 
 private slots:
-    void on_tableWidget_cellChanged(int row, int column);
-    void handleButtonReturn(int id);
+    // void on_tableWidget_cellChanged(int row, int column);
+    void handleButtonReturn(int id, QPushButton *btn_kembali);
 
     void on_backPeminjaman_clicked();
 

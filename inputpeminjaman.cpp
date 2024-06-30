@@ -4,20 +4,80 @@
 #include "datapeminjaman.h"
 #include "dataanggota.h"
 #include "buku.h"
+#include "listpeminjaman.h"
+#include <QMessageBox>
 
-inputPeminjaman::inputPeminjaman(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent)
+inputPeminjaman::inputPeminjaman(Buku *selectedBook, DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::inputPeminjaman)
 {
     this->dataBuku = dataBuku;
     this->dataPeminjaman = dataPeminjaman;
     this->dataAnggota = dataAnggota;
+    this->selectedBook = selectedBook;
     ui->setupUi(this);
+    ui->judulBuku->setText(selectedBook->judul);
+    ui->idBuku->setText(QString::number(selectedBook->id));
+    QLocale locale(QLocale("id_ID"));
+    QDateTime waktu = QDate::currentDate().addDays(60).endOfDay();
+    ui->waktuPengembalian->setText(locale.toString(waktu, "d MMMM yyyy"));
+    ui->tableWidget->setColumnCount(3);
+    QStringList columnNames;
+    columnNames<<"Nama Anggota"<<"NIM"<<"Aksi";
+    ui->tableWidget->setRowCount(10);
+    ui->tableWidget->setHorizontalHeaderLabels(columnNames);
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    showTabelAnggota();
 }
 
 inputPeminjaman::~inputPeminjaman()
 {
     delete ui;
+}
+
+void inputPeminjaman::showTabelAnggota()
+{
+    ui->tableWidget->show();
+    // ui->namaAnggota->hide();
+    // ui->pilihAnggota->hide();
+    struct Anggota *anggota = this->dataAnggota->head;
+    int i = 0;
+    ui->tableWidget->setRowCount(this->dataBuku->count-1);
+    QTableWidget *currentTable = ui->tableWidget;
+    while (anggota != NULL) {
+        if (anggota->nim == searchQuery || searchQuery == "") {
+            QTableWidgetItem* item = new QTableWidgetItem();
+            item->setText(anggota->nama);
+            ui->tableWidget->setItem(i, 0, item);
+            QTableWidgetItem* item2 = new QTableWidgetItem();
+            item2->setText(anggota->nim);
+            ui->tableWidget->setItem(i, 1, item2);
+
+            QPushButton *btn_pilih;
+            btn_pilih = new QPushButton();
+            btn_pilih->setText("Pilih");
+            connect(btn_pilih, &QPushButton::released, this,
+                    [this, anggota, i]()
+                    {
+                        // handleButtonpilih(i);
+                        handleButtonPilih(anggota, i);
+                    });
+            ui->tableWidget->setCellWidget(i,2,(QWidget*)btn_pilih);
+            i++;
+        }
+        anggota = anggota->next;
+    }
+    ui->tableWidget->setRowCount(i);
+}
+
+void inputPeminjaman::handleButtonPilih(Anggota *anggota, int row)
+{
+    // ui->namaAnggota->show();
+    // ui->pilihAnggota->show();
+    ui->namaAnggota->setText(anggota->nama);
+    ui->tableWidget->selectRow(row);
+    this->selectedAnggota = anggota;
+    // ui->tableWidget->hide();
 }
 
 void inputPeminjaman::on_confirmPeminjaman_rejected()
@@ -26,5 +86,19 @@ void inputPeminjaman::on_confirmPeminjaman_rejected()
     cancelBuku->show();
     cancelBuku->setGeometry(300, 150, 900, 600);
     this->close();
+}
+
+
+void inputPeminjaman::on_confirmPeminjaman_accepted()
+{
+    if (selectedAnggota != NULL) {
+        dataPeminjaman->createData(selectedAnggota->nama, selectedAnggota->nim, selectedBook->judul, selectedBook->id);
+        QMessageBox::information(0,"Tambah Peminjaman", "Data peminjaman berhasil ditambah!");
+        listPeminjaman *lp = new listPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
+        lp->show();
+        this->close();
+    } else {
+        QMessageBox::critical(this,"Tambah Peminjaman", "Pilih anggota terlebih dahulu!");
+    }
 }
 

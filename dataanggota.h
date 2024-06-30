@@ -2,6 +2,7 @@
 #define DATAANGGOTA_H
 
 #include <QObject>
+#include "datapeminjaman.h"
 
 struct Anggota {
     QString nama;
@@ -17,12 +18,12 @@ class DataAnggota : public QObject
 public:
     explicit DataAnggota(QObject *parent = nullptr);
     Anggota *head;
-    QString filePath = "C:/Users/kadek/Documents/LibraryManagement/data-anggota.txt";
+    QString filePath = "C:/Made Aditya/Sublime Text/Belajar C - C++/qt-app/LibraryManagement/data-anggota.txt";
     int count;
     void getData();
     void createData(QString nama, QString nim);
     void updateData(int row, int col, QString value);
-    void deleteData(QString nim);
+    void deleteData(QString nim, DataPeminjaman *dataPeminjaman);
     void searchData(QString query);
 
 signals:

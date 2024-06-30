@@ -6,7 +6,8 @@
 
 struct Peminjaman {
     int id;
-    QString nama;
+    QString namaAnggota;
+    QString nimAnggota;
     QString judulBuku;
     int idBuku;
     QDateTime waktuPengembalian;
@@ -21,16 +22,18 @@ class DataPeminjaman : public QObject
 public:
     explicit DataPeminjaman(QObject *parent = nullptr);
     Peminjaman *head;
-    QString filePath = "C:/Users/kadek/Documents/LibraryManagement/data-peminjaman.txt";
+    QString filePath = "C:/Made Aditya/Sublime Text/Belajar C - C++/qt-app/LibraryManagement/data-peminjaman.txt";
     QString timeFormat = "yyyy-MM-dd HH:mm:ss";
     int count;
     void getData();
-    void createData(QString nama, QString judulBuku, int idBuku);
+    void createData(QString namaAnggota, QString nimAnggota, QString judulBuku, int idBuku);
     // void updateData(int row, int col, QString value);
     // void deleteData(int id);
     void refreshData();
     void returnBook(int id);
     void searchData(QString query);
+    void deleteByBuku(int idBuku);
+    void deleteByAnggota(QString nim);
 
 signals:
 };

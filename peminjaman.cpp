@@ -26,7 +26,7 @@ peminjaman::~peminjaman()
 void peminjaman::on_listPinjam_clicked()
 {
     // qInfo()<<"List Peminjaman";
-    qInfo()<<dataPeminjaman->head->nama;
+    // qInfo()<<dataPeminjaman->head->nama;
     listPeminjaman *lp = new listPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
     lp->setGeometry(300, 150, 900, 600);
     lp->show();

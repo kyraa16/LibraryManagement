@@ -20,7 +20,7 @@ anggota::anggota(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota
     ui->tableWidget->setColumnCount(3);
     QStringList columnNames;
     columnNames<<"Nama Anggota"<<"NIM"<<"Aksi";
-    ui->tableWidget->setRowCount(10);
+    // ui->tableWidget->setRowCount(10);
     ui->tableWidget->setHorizontalHeaderLabels(columnNames);
     refreshTable();
 }
@@ -35,10 +35,11 @@ void anggota::refreshTable()
     // searchResult = dataMhs->head;
     struct Anggota *anggota = this->dataAnggota->head;
     int i = 0;
-    ui->tableWidget->setRowCount(this->dataBuku->count-1);
+    ui->tableWidget->setRowCount(this->dataBuku->count);
     QTableWidget *currentTable = ui->tableWidget;
     while (anggota != NULL) {
         if (anggota->nim == searchQuery || searchQuery == "") {
+            qInfo()<<anggota->nama<<"-"<<anggota->nim;
             QTableWidgetItem* item = new QTableWidgetItem();
             item->setText(anggota->nama);
             ui->tableWidget->setItem(i, 0, item);
@@ -67,8 +68,8 @@ void anggota::refreshTable()
 }
 
 void anggota::handleButtonDelete(QString nim) {
-    Anggota *temp = dataAnggota->head;
-    dataAnggota->deleteData(nim);
+    // Anggota *temp = dataAnggota->head;
+    dataAnggota->deleteData(nim, dataPeminjaman);
     refreshTable();
 }
 
