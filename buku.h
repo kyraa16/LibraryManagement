@@ -37,6 +37,8 @@ private slots:
     void handleButtonDelete(int id);
     void handleButtonPinjam(Buku *buku);
 
+    void on_searchInput_returnPressed();
+
 private:
     Ui::buku *ui;
     DataBuku *dataBuku;

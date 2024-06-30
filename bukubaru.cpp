@@ -33,13 +33,54 @@ void bukuBaru::on_tambahBuku_rejected()
 
 void bukuBaru::on_tambahBuku_accepted()
 {
+    submitForm();
+}
+
+void bukuBaru::submitForm()
+{
     QString judul = ui->judulInput->text();
     QString author = ui->authorInput->text();
     QString penerbit = ui->penerbitInput->text();
-    dataBuku->createData(judul, penerbit, author);
-    QMessageBox::information(0,"Tambah Buku", "Data buku berhasil ditambah!");
-    buku *b = new buku(dataBuku, dataPeminjaman, dataAnggota);
-    b->show();
-    this->close();
+    if (validateInput()) {
+        dataBuku->createData(judul, penerbit, author);
+        QMessageBox::information(0,"Tambah Buku", "Data buku berhasil ditambah!");
+        buku *b = new buku(dataBuku, dataPeminjaman, dataAnggota);
+        b->show();
+        this->close();
+    }
+}
+
+bool bukuBaru::validateInput()
+{
+    QString errorMsg = "";
+    QString judul = ui->judulInput->text();
+    QString author = ui->authorInput->text();
+    QString penerbit = ui->penerbitInput->text();
+    if (judul == "")
+        errorMsg = "Masukkan judul terlebih dahulu";
+    else if (author == "")
+        errorMsg = "Masukkan author terlebih dahulu";
+    else if (penerbit == "")
+        errorMsg = "Masukkan penerbit terlebih dahulu";
+    if (errorMsg != "")
+        QMessageBox::critical(this,"Tambah Peminjaman",errorMsg);
+    return errorMsg == "";
+}
+
+void bukuBaru::on_judulInput_returnPressed()
+{
+    submitForm();
+}
+
+
+void bukuBaru::on_authorInput_returnPressed()
+{
+    submitForm();
+}
+
+
+void bukuBaru::on_penerbitInput_returnPressed()
+{
+    submitForm();
 }
 

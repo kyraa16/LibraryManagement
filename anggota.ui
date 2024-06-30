@@ -50,13 +50,13 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>280</x>
+      <x>70</x>
       <y>80</y>
-      <width>321</width>
+      <width>784</width>
       <height>411</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1,12">
+    <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1,0">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2">
        <property name="bottomMargin">
@@ -163,7 +163,7 @@
      <x>0</x>
      <y>0</y>
      <width>903</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

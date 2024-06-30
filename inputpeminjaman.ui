@@ -20,9 +20,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>270</x>
+      <x>220</x>
       <y>10</y>
-      <width>321</width>
+      <width>411</width>
       <height>451</height>
      </rect>
     </property>
@@ -92,10 +92,10 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="searchInput"/>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="searchButton">
          <property name="text">
           <string>Cari</string>
          </property>
@@ -233,7 +233,7 @@
      <x>0</x>
      <y>0</y>
      <width>876</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

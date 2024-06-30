@@ -24,23 +24,37 @@ void DataAnggota::getData()
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList fields = line.split(",");
-        if (currentHead == NULL) {
-            currentHead = new Anggota();
-            currentHead->nama = fields[0];
-            currentHead->nim = fields[1];
-            currentHead->next = NULL;
-            currentHead->prev = NULL;
-            temp = currentHead;
-        } else {
+        if (fields.count() == 2) {
             struct Anggota *node = new Anggota();
             node->nama = fields[0];
             node->nim = fields[1];
             node->next = NULL;
-            node->prev = temp;
-            temp->next = node;
-            temp = node;
+            if (currentHead == NULL) {
+                temp = currentHead = node;
+                currentHead->prev = NULL;
+            } else {
+                node->prev = temp;
+                temp->next = node;
+                temp = node;
+            }
+            // if (currentHead == NULL) {
+            //     currentHead = new Anggota();
+            //     currentHead->nama = fields[0];
+            //     currentHead->nim = fields[1];
+            //     currentHead->next = NULL;
+            //     currentHead->prev = NULL;
+            //     temp = currentHead;
+            // } else {
+            //     struct Anggota *node = new Anggota();
+            //     node->nama = fields[0];
+            //     node->nim = fields[1];
+            //     node->next = NULL;
+            //     node->prev = temp;
+            //     temp->next = node;
+            //     temp = node;
+            // }
+            c++;
         }
-        c++;
     }
     file.close();
     head = currentHead;
@@ -62,7 +76,7 @@ void DataAnggota::createData(QString nama, QString nim)
     QString str = "";
     Anggota *temp = head;
     int i = 0;
-    if(file.open(QIODevice::ReadWrite)) {
+    if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
         // qInfo()<<str;
         // file.write(str.toUtf8());
         QTextStream out(&file);
@@ -83,7 +97,7 @@ void DataAnggota::updateData(int row, int col, QString value)
     QString str = "";
     Anggota *temp = head;
     int i = 0;
-    if(file.open(QIODevice::ReadWrite)) {
+    if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
         // qInfo()<<str;
         // file.write(str.toUtf8());
         QTextStream out(&file);
@@ -115,7 +129,7 @@ void DataAnggota::deleteData(QString nim, DataPeminjaman *dataPeminjaman) {
     // qInfo()<<"Delete row : "<<nim.compare(temp->nim);
     QFile file(filePath);
     QString str = "";
-    if(file.open(QIODevice::WriteOnly)) {
+    if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         qInfo()<<str;
         // file.write("");
         // file.write(str.toUtf8());

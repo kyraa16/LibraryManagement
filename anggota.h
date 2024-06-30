@@ -31,6 +31,8 @@ private slots:
 
     void on_tableWidget_cellChanged(int row, int column);
 
+    void on_searchAnggota_returnPressed();
+
 private:
     Ui::anggota *ui;
     DataBuku *dataBuku;

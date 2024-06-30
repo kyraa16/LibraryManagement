@@ -39,7 +39,7 @@ void listPeminjaman::refreshTable()
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setRowCount(this->dataPeminjaman->count);
     while (peminjaman != NULL) {
-        if (searchQuery == "") {
+        if (QString::number(peminjaman->id) == searchQuery || peminjaman->nimAnggota.contains(searchQuery) || peminjaman->namaAnggota.contains(searchQuery, Qt::CaseInsensitive) || searchQuery == "") {
             // qInfo()<<peminjaman->namaAnggota<<"-"<<peminjaman->nimAnggota;
             QTableWidgetItem* item = new QTableWidgetItem();
             item->setText(peminjaman->namaAnggota);
@@ -77,6 +77,16 @@ void listPeminjaman::refreshTable()
         peminjaman = peminjaman->next;
     }
     ui->tableWidget->setRowCount(i);
+    ui->tableWidget->setColumnWidth(5, 140);
+    ui->tableWidget->setColumnWidth(4, 120);
+    // for (int j = 0; j < i; ++j)
+    //     if (j != 5 && j != 4)
+    //         ui->tableWidget->horizontalHeader()->setSectionResizeMode(j,QHeaderView::Stretch);
+    const int rowHeight = ui->tableWidget->verticalHeader()->defaultSectionSize();
+    int totalRows = i < 3 ? 3 : (i > 10 ? 10 : i);
+    int totalHeight = totalRows * rowHeight + ui->tableWidget->horizontalHeader()->height() + 16;
+    ui->tableWidget->setMinimumHeight(totalHeight);
+    ui->tableWidget->setMaximumHeight(totalHeight);
     finishRenderTable = true;
     qInfo()<<i;
 }
@@ -95,5 +105,19 @@ void listPeminjaman::on_backPeminjaman_clicked()
     backPeminjaman->show();
     backPeminjaman->setGeometry(300, 150, 900, 600);
     this->close();
+}
+
+
+void listPeminjaman::on_searchButton_clicked()
+{
+    searchQuery = ui->searchInput->text();
+    refreshTable();
+}
+
+
+void listPeminjaman::on_searchInput_returnPressed()
+{
+    searchQuery = ui->searchInput->text();
+    refreshTable();
 }
 

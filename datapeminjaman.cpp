@@ -24,64 +24,63 @@ void DataPeminjaman::getData()
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList fields = line.split(",");
-        // qInfo()<<line;
-        qInfo()<<fields[6];
-        struct Peminjaman *node = new Peminjaman();
-        // qInfo()<<fields[0];
-        node->id = fields[0].toInt();
-        node->namaAnggota = fields[1];
-        node->nimAnggota = fields[2];
-        node->judulBuku = fields[3];
-        node->idBuku = fields[4].toInt();
-        node->waktuPengembalian = QDateTime::fromString(fields[5], timeFormat);
-        if (fields[6] != "Dikembalikan" && node->waktuPengembalian < QDateTime::currentDateTime()) {
-            node->status = "Lewat Batas Waktu";
-            isThereChange = true;
-        }
-        else
-            node->status = fields[6];
-        node->next = NULL;
+        if (fields.count() == 7) {
+            struct Peminjaman *node = new Peminjaman();
+            node->id = fields[0].toInt();
+            node->namaAnggota = fields[1];
+            node->nimAnggota = fields[2];
+            node->judulBuku = fields[3];
+            node->idBuku = fields[4].toInt();
+            node->waktuPengembalian = QDateTime::fromString(fields[5], timeFormat);
+            if (fields[6] != "Dikembalikan" && node->waktuPengembalian < QDateTime::currentDateTime()) {
+                node->status = "Lewat Batas Waktu";
+                isThereChange = true;
+            }
+            else
+                node->status = fields[6];
+            node->next = NULL;
 
-        if (currentHead == NULL) {
-            temp = currentHead = node;
-            currentHead->prev = NULL;
-        } else {
-            node->prev = temp;
-            temp->next = node;
-            temp = node;
+            if (currentHead == NULL) {
+                temp = currentHead = node;
+                currentHead->prev = NULL;
+            } else {
+                node->prev = temp;
+                temp->next = node;
+                temp = node;
+            }
+            // if (currentHead == NULL) {
+            //     currentHead = new Peminjaman();
+            //     currentHead->id = fields[0].toInt();
+            //     currentHead->namaAnggota = fields[1];
+            //     currentHead->judulBuku = fields[2];
+            //     currentHead->idBuku = fields[3].toInt();
+            //     currentHead->waktuPengembalian = QDateTime::fromString(fields[4], timeFormat);
+            //     if (fields[5] != "Dikembalikan" && currentHead->waktuPengembalian < QDateTime::currentDateTime())
+            //         currentHead->status = "Lewat Batas Waktu";
+            //     else
+            //         currentHead->status = fields[5];
+            //     currentHead->next = NULL;
+            //     currentHead->prev = NULL;
+            //     temp = currentHead;
+            // } else {
+            //     struct Peminjaman *node = new Peminjaman();
+            //     qInfo()<<fields[0];
+            //     node->id = fields[0].toInt();
+            //     node->namaAnggota = fields[1];
+            //     node->judulBuku = fields[2];
+            //     node->idBuku = fields[3].toInt();
+            //     node->waktuPengembalian = QDateTime::fromString(fields[4], timeFormat);
+            //     if (fields[5] != "Dikembalikan" && node->waktuPengembalian < QDateTime::currentDateTime())
+            //         node->status = "Lewat Batas Waktu";
+            //     else
+            //         node->status = fields[5];
+            //     node->next = NULL;
+            //     node->prev = temp;
+            //     temp->next = node;
+            //     temp = node;
+            // }
+            c++;
         }
-        // if (currentHead == NULL) {
-        //     currentHead = new Peminjaman();
-        //     currentHead->id = fields[0].toInt();
-        //     currentHead->namaAnggota = fields[1];
-        //     currentHead->judulBuku = fields[2];
-        //     currentHead->idBuku = fields[3].toInt();
-        //     currentHead->waktuPengembalian = QDateTime::fromString(fields[4], timeFormat);
-        //     if (fields[5] != "Dikembalikan" && currentHead->waktuPengembalian < QDateTime::currentDateTime())
-        //         currentHead->status = "Lewat Batas Waktu";
-        //     else
-        //         currentHead->status = fields[5];
-        //     currentHead->next = NULL;
-        //     currentHead->prev = NULL;
-        //     temp = currentHead;
-        // } else {
-        //     struct Peminjaman *node = new Peminjaman();
-        //     qInfo()<<fields[0];
-        //     node->id = fields[0].toInt();
-        //     node->namaAnggota = fields[1];
-        //     node->judulBuku = fields[2];
-        //     node->idBuku = fields[3].toInt();
-        //     node->waktuPengembalian = QDateTime::fromString(fields[4], timeFormat);
-        //     if (fields[5] != "Dikembalikan" && node->waktuPengembalian < QDateTime::currentDateTime())
-        //         node->status = "Lewat Batas Waktu";
-        //     else
-        //         node->status = fields[5];
-        //     node->next = NULL;
-        //     node->prev = temp;
-        //     temp->next = node;
-        //     temp = node;
-        // }
-        c++;
     }
     file.close();
     head = currentHead;
@@ -110,7 +109,7 @@ void DataPeminjaman::createData(QString namaAnggota, QString nimAnggota, QString
     QString str = "";
     Peminjaman *temp = head;
     int i = 0;
-    if(file.open(QIODevice::ReadWrite)) {
+    if(file.open(QIODevice::ReadWrite  | QIODevice::Truncate)) {
         QTextStream out(&file);
         while (temp != NULL) {
             out<<"";
@@ -131,7 +130,7 @@ void DataPeminjaman::refreshData()
     QString str = "";
     Peminjaman *temp = head;
     int i = 0;
-    if(file.open(QIODevice::ReadWrite)) {
+    if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
         QTextStream out(&file);
         while (temp != NULL) {
             out<<"";
@@ -151,7 +150,7 @@ void DataPeminjaman::deleteByBuku(int idBuku) {
     bool deleted = false;
     QFile file(filePath);
     QString str = "";
-    if(file.open(QIODevice::WriteOnly)) {
+    if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         qInfo()<<str;
         QTextStream out(&file);
         while (temp != NULL) {
@@ -196,7 +195,7 @@ void DataPeminjaman::deleteByAnggota(QString nim) {
     bool deleted = false;
     QFile file(filePath);
     QString str = "";
-    if(file.open(QIODevice::WriteOnly)) {
+    if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         qInfo()<<str;
         QTextStream out(&file);
         while (temp != NULL) {
@@ -241,7 +240,7 @@ void DataPeminjaman::returnBook(int id)
     QString str = "";
     Peminjaman *temp = head;
     int i = 0;
-    if(file.open(QIODevice::WriteOnly)) {
+    if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         file.write("");
         QTextStream out(&file);
         while (temp != NULL) {

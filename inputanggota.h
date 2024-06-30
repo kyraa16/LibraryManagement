@@ -23,11 +23,17 @@ private slots:
 
     void on_confirmAnggota_accepted();
 
+    void on_inputNama_returnPressed();
+
+    void on_inputNim_returnPressed();
+
 private:
     Ui::inputAnggota *ui;
     DataBuku *dataBuku;
     DataPeminjaman *dataPeminjaman;
     DataAnggota *dataAnggota;
+    bool validateInput();
+    void submitForm();
 };
 
 #endif // INPUTANGGOTA_H

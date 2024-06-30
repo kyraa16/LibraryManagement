@@ -31,13 +31,49 @@ void inputAnggota::on_confirmAnggota_rejected()
 
 void inputAnggota::on_confirmAnggota_accepted()
 {
-    QString nama = ui->inputNama->text();
-    QString nim = ui->inputNim->text();
-
-    dataAnggota->createData(nama,nim);
-    QMessageBox::information(0,"Tambah Anggota", "Data anggota berhasil ditambah!");
-    anggota *a = new anggota(dataBuku, dataPeminjaman, dataAnggota);
-    a->show();
-    this->close();
+    submitForm();
 }
 
+void inputAnggota::submitForm()
+{
+    QString nama = ui->inputNama->text();
+    QString nim = ui->inputNim->text();
+    if (validateInput()) {
+        dataAnggota->createData(nama,nim);
+        QMessageBox::information(0,"Tambah Anggota", "Data anggota berhasil ditambah!");
+        anggota *a = new anggota(dataBuku, dataPeminjaman, dataAnggota);
+        a->show();
+        this->close();
+    }
+}
+
+bool inputAnggota::validateInput()
+{
+    QString errorMsg = "";
+    QString nama = ui->inputNama->text();
+    QString nim = ui->inputNim->text();
+    if (nama == "")
+        errorMsg = "Masukkan nama terlebih dahulu";
+    else if (nim == "")
+        errorMsg = "Masukkan NIM terlebih dahulu";
+    Anggota *temp = dataAnggota->head;
+    while (temp != NULL && temp->nim != nim)
+        temp = temp->next;
+    if (temp != NULL && temp->nim == nim)
+        errorMsg = "NIM sudah ada";
+    if (errorMsg != "")
+        QMessageBox::critical(this,"Tambah Peminjaman",errorMsg);
+    return errorMsg == "";
+}
+
+
+void inputAnggota::on_inputNama_returnPressed()
+{
+    submitForm();
+}
+
+
+void inputAnggota::on_inputNim_returnPressed()
+{
+    submitForm();
+}

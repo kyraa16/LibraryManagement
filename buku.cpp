@@ -43,9 +43,10 @@ void buku::refreshTable()
     ui->tableWidget->setRowCount(this->dataBuku->count);
     QTableWidget *currentTable = ui->tableWidget;
     while (buku != NULL) {
-        if (buku->id == searchQuery.toInt() || searchQuery == "") {
+        if (buku->id == searchQuery.toInt() || buku->judul.contains(searchQuery, Qt::CaseInsensitive) || searchQuery == "") {
             QTableWidgetItem* item = new QTableWidgetItem();
             item->setText(QString::number(buku->id));
+            item->setFlags(item->flags() & ~Qt::ItemIsEditable);
             ui->tableWidget->setItem(i, 0, item);
             QTableWidgetItem* item2 = new QTableWidgetItem();
             item2->setText(buku->judul);
@@ -98,6 +99,12 @@ void buku::refreshTable()
         buku = buku->next;
     }
     ui->tableWidget->setRowCount(i);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
+    const int rowHeight = ui->tableWidget->verticalHeader()->defaultSectionSize();
+    int totalRows = i < 3 ? 3 : (i > 10 ? 10 : i);
+    int totalHeight = totalRows * rowHeight + ui->tableWidget->horizontalHeader()->height() + 3;
+    ui->tableWidget->setMinimumHeight(totalHeight);
+    ui->tableWidget->setMaximumHeight(totalHeight);
     finishRenderTable = true;
     qInfo()<<i;
 }
@@ -174,5 +181,12 @@ void buku::handleButtonPinjam(Buku *buku) {
     ip->show();
     ip->setGeometry(300, 150, 900, 600);
     this->close();
+}
+
+
+void buku::on_searchInput_returnPressed()
+{
+    searchQuery = ui->searchInput->text();
+    refreshTable();
 }
 

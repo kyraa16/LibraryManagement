@@ -26,6 +26,10 @@ private slots:
 
     void on_backPeminjaman_clicked();
 
+    void on_searchButton_clicked();
+
+    void on_searchInput_returnPressed();
+
 private:
     Ui::listPeminjaman *ui;
     DataBuku *dataBuku;

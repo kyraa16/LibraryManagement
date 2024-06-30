@@ -42,10 +42,10 @@ void inputPeminjaman::showTabelAnggota()
     // ui->pilihAnggota->hide();
     struct Anggota *anggota = this->dataAnggota->head;
     int i = 0;
-    ui->tableWidget->setRowCount(this->dataBuku->count-1);
+    ui->tableWidget->setRowCount(this->dataBuku->count);
     QTableWidget *currentTable = ui->tableWidget;
     while (anggota != NULL) {
-        if (anggota->nim == searchQuery || searchQuery == "") {
+        if (anggota->nim.contains(searchQuery) || anggota->nama.contains(searchQuery, Qt::CaseInsensitive)) {
             QTableWidgetItem* item = new QTableWidgetItem();
             item->setText(anggota->nama);
             ui->tableWidget->setItem(i, 0, item);
@@ -67,7 +67,15 @@ void inputPeminjaman::showTabelAnggota()
         }
         anggota = anggota->next;
     }
+    ui->tableWidget->setColumnWidth(2, 80);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Stretch);
     ui->tableWidget->setRowCount(i);
+    const int rowHeight = ui->tableWidget->verticalHeader()->defaultSectionSize();
+    int totalRows = i < 3 ? 3 : (i > 10 ? 10 : i);
+    int totalHeight = totalRows * rowHeight + ui->tableWidget->horizontalHeader()->height() + 3;
+    ui->tableWidget->setMinimumHeight(totalHeight);
+    ui->tableWidget->setMaximumHeight(totalHeight);
 }
 
 void inputPeminjaman::handleButtonPilih(Anggota *anggota, int row)
@@ -100,5 +108,19 @@ void inputPeminjaman::on_confirmPeminjaman_accepted()
     } else {
         QMessageBox::critical(this,"Tambah Peminjaman", "Pilih anggota terlebih dahulu!");
     }
+}
+
+
+void inputPeminjaman::on_searchButton_clicked()
+{
+    searchQuery = ui->searchInput->text();
+    showTabelAnggota();
+}
+
+
+void inputPeminjaman::on_searchInput_returnPressed()
+{
+    searchQuery = ui->searchInput->text();
+    showTabelAnggota();
 }
 

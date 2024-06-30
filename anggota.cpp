@@ -35,10 +35,10 @@ void anggota::refreshTable()
     // searchResult = dataMhs->head;
     struct Anggota *anggota = this->dataAnggota->head;
     int i = 0;
-    ui->tableWidget->setRowCount(this->dataBuku->count);
+    ui->tableWidget->setRowCount(this->dataBuku->count+1);
     QTableWidget *currentTable = ui->tableWidget;
     while (anggota != NULL) {
-        if (anggota->nim == searchQuery || searchQuery == "") {
+        if (anggota->nim.contains(searchQuery) || anggota->nama.contains(searchQuery, Qt::CaseInsensitive)) {
             qInfo()<<anggota->nama<<"-"<<anggota->nim;
             QTableWidgetItem* item = new QTableWidgetItem();
             item->setText(anggota->nama);
@@ -62,7 +62,13 @@ void anggota::refreshTable()
         }
         anggota = anggota->next;
     }
+    ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget->setRowCount(i);
+    const int rowHeight = ui->tableWidget->verticalHeader()->defaultSectionSize();
+    int totalRows = i < 3 ? 3 : (i > 10 ? 10 : i);
+    int totalHeight = totalRows * rowHeight + ui->tableWidget->horizontalHeader()->height() + 3;
+    ui->tableWidget->setMinimumHeight(totalHeight);
+    ui->tableWidget->setMaximumHeight(totalHeight);
     finishRenderTable = true;
     qInfo()<<i;
 }
@@ -122,5 +128,12 @@ void anggota::on_tableWidget_cellChanged(int row, int column)
         QString val = ui->tableWidget->item(row, column)->text();
         dataAnggota->updateData(row, column, val);
     }
+}
+
+
+void anggota::on_searchAnggota_returnPressed()
+{
+    searchQuery = ui->searchAnggota->text();
+    refreshTable();
 }
 

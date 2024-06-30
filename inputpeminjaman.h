@@ -25,6 +25,10 @@ private slots:
 
     void on_confirmPeminjaman_accepted();
 
+    void on_searchButton_clicked();
+
+    void on_searchInput_returnPressed();
+
 private:
     Ui::inputPeminjaman *ui;
     DataBuku *dataBuku;

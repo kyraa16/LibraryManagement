@@ -24,11 +24,19 @@ private slots:
 
     void on_tambahBuku_accepted();
 
+    void on_judulInput_returnPressed();
+
+    void on_authorInput_returnPressed();
+
+    void on_penerbitInput_returnPressed();
+
 private:
     Ui::bukuBaru *ui;
     DataBuku *dataBuku;
     DataPeminjaman *dataPeminjaman;
     DataAnggota *dataAnggota;
+    bool validateInput();
+    void submitForm();
 };
 
 #endif // BUKUBARU_H

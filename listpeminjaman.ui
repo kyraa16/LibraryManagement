@@ -99,10 +99,10 @@
         </spacer>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="searchInput"/>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButton">
+        <widget class="QPushButton" name="searchButton">
          <property name="text">
           <string>Cari</string>
          </property>
@@ -135,7 +135,7 @@
      <x>0</x>
      <y>0</y>
      <width>864</width>
-     <height>21</height>
+     <height>22</height>
     </rect>
    </property>
   </widget>

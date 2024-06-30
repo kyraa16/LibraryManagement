@@ -25,28 +25,44 @@ void DataBuku::getData()
     while(!in.atEnd()) {
         QString line = in.readLine();
         QStringList fields = line.split(",");
-        if (currentHead == NULL) {
-            currentHead = new Buku();
-            currentHead->id = fields[0].toInt();
-            currentHead->judul = fields[1];
-            currentHead->penerbit = fields[2];
-            currentHead->author = fields[3];
-            currentHead->next = NULL;
-            currentHead->prev = NULL;
-            temp = currentHead;
-        } else {
+        if (fields.count() == 4) {
             struct Buku *node = new Buku();
-            qInfo()<<fields[0];
             node->id = fields[0].toInt();
             node->judul = fields[1];
             node->penerbit = fields[2];
             node->author = fields[3];
             node->next = NULL;
-            node->prev = temp;
-            temp->next = node;
-            temp = node;
+            if (currentHead == NULL) {
+                temp = currentHead = node;
+                currentHead->prev = NULL;
+            } else {
+                node->prev = temp;
+                temp->next = node;
+                temp = node;
+            }
+            // if (currentHead == NULL) {
+            //     currentHead = new Buku();
+            //     currentHead->id = fields[0].toInt();
+            //     currentHead->judul = fields[1];
+            //     currentHead->penerbit = fields[2];
+            //     currentHead->author = fields[3];
+            //     currentHead->next = NULL;
+            //     currentHead->prev = NULL;
+            //     temp = currentHead;
+            // } else {
+            //     struct Buku *node = new Buku();
+            //     qInfo()<<fields[0];
+            //     node->id = fields[0].toInt();
+            //     node->judul = fields[1];
+            //     node->penerbit = fields[2];
+            //     node->author = fields[3];
+            //     node->next = NULL;
+            //     node->prev = temp;
+            //     temp->next = node;
+            //     temp = node;
+            // }
+            c++;
         }
-        c++;
     }
     file.close();
     head = currentHead;
@@ -70,7 +86,7 @@ void DataBuku::createData(QString judul, QString penerbit, QString author)
     QString str = "";
     Buku *temp = head;
     int i = 0;
-    if(file.open(QIODevice::ReadWrite)) {
+    if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
         // qInfo()<<str;
         // file.write(str.toUtf8());
         QTextStream out(&file);
@@ -91,7 +107,7 @@ void DataBuku::updateData(int row, int col, QString value)
     QString str = "";
     Buku *temp = head;
     int i = 0;
-    if(file.open(QIODevice::ReadWrite)) {
+    if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
         // qInfo()<<str;
         // file.write(str.toUtf8());
         QTextStream out(&file);
@@ -121,7 +137,7 @@ void DataBuku::deleteData(int id, DataPeminjaman *dataPeminjaman) {
     bool deleted = false;
     QFile file(filePath);
     QString str = "";
-    if(file.open(QIODevice::WriteOnly)) {
+    if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
         qInfo()<<str;
         // file.write("");
         // file.write(str.toUtf8());
