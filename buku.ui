@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>874</width>
-    <height>515</height>
+    <width>939</width>
+    <height>571</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -54,12 +54,12 @@
     <property name="geometry">
      <rect>
       <x>150</x>
-      <y>80</y>
-      <width>581</width>
-      <height>389</height>
+      <y>90</y>
+      <width>601</width>
+      <height>351</height>
      </rect>
     </property>
-    <layout class="QVBoxLayout" name="verticalLayout" stretch="2,1,12">
+    <layout class="QVBoxLayout" name="verticalLayout">
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <property name="bottomMargin">
@@ -158,10 +158,35 @@
          <height>0</height>
         </size>
        </property>
+       <property name="maximumSize">
+        <size>
+         <width>600</width>
+         <height>500</height>
+        </size>
+       </property>
       </widget>
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>-140</x>
+      <y>-60</y>
+      <width>1131</width>
+      <height>661</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/image1/pic4.png);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>label_2</zorder>
+   <zorder>horizontalLayoutWidget</zorder>
+   <zorder>verticalLayoutWidget</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>876</width>
-    <height>577</height>
+    <width>940</width>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,9 +20,9 @@
    <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>220</x>
-      <y>10</y>
-      <width>411</width>
+      <x>130</x>
+      <y>20</y>
+      <width>656</width>
       <height>451</height>
      </rect>
     </property>
@@ -154,7 +154,7 @@
           </size>
          </property>
          <property name="text">
-          <string>(Pilih anggota terlebih dahulu)</string>
+          <string>( Pilih anggota )</string>
          </property>
         </widget>
        </item>
@@ -226,14 +226,32 @@
      </item>
     </layout>
    </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>-130</x>
+      <y>0</y>
+      <width>1141</width>
+      <height>631</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">image: url(:/image1/pic4.png)</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <zorder>label_5</zorder>
+   <zorder>layoutWidget</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>876</width>
-     <height>22</height>
+     <width>940</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
