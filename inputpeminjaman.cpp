@@ -71,11 +71,6 @@ void inputPeminjaman::showTabelAnggota()
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(0,QHeaderView::Stretch);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(1,QHeaderView::Stretch);
     ui->tableWidget->setRowCount(i);
-    const int rowHeight = ui->tableWidget->verticalHeader()->defaultSectionSize();
-    int totalRows = i < 3 ? 3 : (i > 10 ? 10 : i);
-    int totalHeight = totalRows * rowHeight + ui->tableWidget->horizontalHeader()->height() + 3;
-    ui->tableWidget->setMinimumHeight(totalHeight);
-    ui->tableWidget->setMaximumHeight(totalHeight);
 }
 
 void inputPeminjaman::handleButtonPilih(Anggota *anggota, int row)

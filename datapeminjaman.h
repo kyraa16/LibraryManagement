@@ -22,7 +22,7 @@ class DataPeminjaman : public QObject
 public:
     explicit DataPeminjaman(QObject *parent = nullptr);
     Peminjaman *head;
-    QString filePath = "C:/Users/kadek/Documents/LibraryManagement/data-peminjaman.txt";
+    QString filePath = "C:/Made Aditya/Sublime Text/Belajar C - C++/qt-app/LibraryManagement/data-peminjaman.txt";
     QString timeFormat = "yyyy-MM-dd HH:mm:ss";
     int count;
     void getData();
