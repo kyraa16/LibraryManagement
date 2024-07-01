@@ -40,27 +40,6 @@ void DataBuku::getData()
                 temp->next = node;
                 temp = node;
             }
-            // if (currentHead == NULL) {
-            //     currentHead = new Buku();
-            //     currentHead->id = fields[0].toInt();
-            //     currentHead->judul = fields[1];
-            //     currentHead->penerbit = fields[2];
-            //     currentHead->author = fields[3];
-            //     currentHead->next = NULL;
-            //     currentHead->prev = NULL;
-            //     temp = currentHead;
-            // } else {
-            //     struct Buku *node = new Buku();
-            //     qInfo()<<fields[0];
-            //     node->id = fields[0].toInt();
-            //     node->judul = fields[1];
-            //     node->penerbit = fields[2];
-            //     node->author = fields[3];
-            //     node->next = NULL;
-            //     node->prev = temp;
-            //     temp->next = node;
-            //     temp = node;
-            // }
             c++;
         }
     }
@@ -87,8 +66,6 @@ void DataBuku::createData(QString judul, QString penerbit, QString author)
     Buku *temp = head;
     int i = 0;
     if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
-        // qInfo()<<str;
-        // file.write(str.toUtf8());
         QTextStream out(&file);
         while (temp != NULL) {
             out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
@@ -101,26 +78,24 @@ void DataBuku::createData(QString judul, QString penerbit, QString author)
     file.close();
 }
 
-void DataBuku::updateData(int row, int col, QString value)
+void DataBuku::updateData(int row, int col, QString value, DataPeminjaman *dataPeminjaman)
 {
     QFile file(filePath);
-    QString str = "";
     Buku *temp = head;
     int i = 0;
     if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
-        // qInfo()<<str;
-        // file.write(str.toUtf8());
         QTextStream out(&file);
         while (temp != NULL) {
             if (i == row) {
-                if (col == 1)
+                if (col == 1) {
                     temp->judul = value;
+                    dataPeminjaman->updateData("idBuku", QString::number(temp->id), "judul", value);
+                }
                 else if (col == 2)
                     temp->penerbit = value;
                 else if (col == 3)
                     temp->author = value;
             }
-            // str += QString::number(temp->id) + "," + temp->judul + "," + temp->penerbit + "," + temp->author + "\n";
             out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
             temp = temp->next;
             i++;
@@ -133,19 +108,12 @@ void DataBuku::updateData(int row, int col, QString value)
 
 void DataBuku::deleteData(int id, DataPeminjaman *dataPeminjaman) {
     Buku *temp = head, *hapus;
-    int i = 0, deletedIndex = 0;
-    bool deleted = false;
+    int i = 0;
     QFile file(filePath);
-    QString str = "";
     if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-        qInfo()<<str;
-        // file.write("");
-        // file.write(str.toUtf8());
         QTextStream out(&file);
-        // out<<str;
         while (temp != NULL) {
             if (temp->id == id) {
-                // qInfo()<<nim;
                 dataPeminjaman->deleteByBuku(temp->id);
                 if (temp == head) {
                     hapus = temp;
@@ -165,18 +133,14 @@ void DataBuku::deleteData(int id, DataPeminjaman *dataPeminjaman) {
                     delete hapus;
                 }
                 count--;
-                deleted = true;
             } else {
                 out<<QString::number(temp->id)<<","<<temp->judul<<","<<temp->penerbit<<","<<temp->author<<"\n";
                 temp = temp->next;
             }
-            deletedIndex += deleted ? 0 : 1;
             i++;
         }
     } else {
         QMessageBox::information(0, "error", file.errorString());
     }
     file.close();
-    // return deletedIndex;
-    // cetakData();
 }

@@ -18,11 +18,11 @@ class DataAnggota : public QObject
 public:
     explicit DataAnggota(QObject *parent = nullptr);
     Anggota *head;
-    QString filePath = "C:/Users/kadek/Documents/LibraryManagement/data-anggota.txt";
+    QString filePath = "C:/Made Aditya/Sublime Text/Belajar C - C++/qt-app/LibraryManagement/data-anggota.txt";
     int count;
     void getData();
     void createData(QString nama, QString nim);
-    void updateData(int row, int col, QString value);
+    void updateData(int row, int col, QString value, DataPeminjaman *dataPeminjaman);
     void deleteData(QString nim, DataPeminjaman *dataPeminjaman);
     void searchData(QString query);
 
