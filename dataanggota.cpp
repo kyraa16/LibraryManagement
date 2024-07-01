@@ -37,22 +37,6 @@ void DataAnggota::getData()
                 temp->next = node;
                 temp = node;
             }
-            // if (currentHead == NULL) {
-            //     currentHead = new Anggota();
-            //     currentHead->nama = fields[0];
-            //     currentHead->nim = fields[1];
-            //     currentHead->next = NULL;
-            //     currentHead->prev = NULL;
-            //     temp = currentHead;
-            // } else {
-            //     struct Anggota *node = new Anggota();
-            //     node->nama = fields[0];
-            //     node->nim = fields[1];
-            //     node->next = NULL;
-            //     node->prev = temp;
-            //     temp->next = node;
-            //     temp = node;
-            // }
             c++;
         }
     }
@@ -77,8 +61,6 @@ void DataAnggota::createData(QString nama, QString nim)
     Anggota *temp = head;
     int i = 0;
     if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
-        // qInfo()<<str;
-        // file.write(str.toUtf8());
         QTextStream out(&file);
         while (temp != NULL) {
             out<<temp->nama<<","<<temp->nim<<"\n";
@@ -91,24 +73,25 @@ void DataAnggota::createData(QString nama, QString nim)
     file.close();
 }
 
-void DataAnggota::updateData(int row, int col, QString value)
+void DataAnggota::updateData(int row, int col, QString value, DataPeminjaman *dataPeminjaman)
 {
     QFile file(filePath);
     QString str = "";
     Anggota *temp = head;
     int i = 0;
     if(file.open(QIODevice::ReadWrite | QIODevice::Truncate)) {
-        // qInfo()<<str;
-        // file.write(str.toUtf8());
         QTextStream out(&file);
         while (temp != NULL) {
             if (i == row) {
-                if (col == 0)
+                if (col == 0) {
+                    dataPeminjaman->updateData("nimAnggota", temp->nim,"namaAnggota",value);
                     temp->nama = value;
-                else if (col == 1)
+                }
+                else if (col == 1) {
+                    dataPeminjaman->updateData("nimAnggota", temp->nim,"nimAnggota",value);
                     temp->nim = value;
+                }
             }
-            // str += QString::number(temp->id) + "," + temp->judul + "," + temp->penerbit + "," + temp->author + "\n";
             out<<temp->nama<<","<<temp->nim<<"\n";
             temp = temp->next;
             i++;
@@ -121,23 +104,12 @@ void DataAnggota::updateData(int row, int col, QString value)
 
 void DataAnggota::deleteData(QString nim, DataPeminjaman *dataPeminjaman) {
     Anggota *temp = head, *hapus;
-    int i = 0, deletedIndex = 0;
-    bool deleted = false;
-    // if (temp->nim == nim) {
-    //     qInfo()<<"Delete row : "<<nim.compare(temp->nim);
-    // }
-    // qInfo()<<"Delete row : "<<nim.compare(temp->nim);
+    int i = 0;
     QFile file(filePath);
-    QString str = "";
     if(file.open(QIODevice::WriteOnly | QIODevice::Truncate)) {
-        qInfo()<<str;
-        // file.write("");
-        // file.write(str.toUtf8());
         QTextStream out(&file);
-        // out<<str;
         while (temp != NULL) {
             if (temp->nim == nim) {
-                // qInfo()<<nim;
                 if (temp == head) {
                     hapus = temp;
                     temp = head = head->next;
@@ -157,18 +129,14 @@ void DataAnggota::deleteData(QString nim, DataPeminjaman *dataPeminjaman) {
                 }
                 dataPeminjaman->deleteByAnggota(nim);
                 count--;
-                deleted = true;
             } else {
                 out<<temp->nama<<","<<temp->nim<<"\n";
                 temp = temp->next;
             }
-            deletedIndex += deleted ? 0 : 1;
             i++;
         }
     } else {
         QMessageBox::information(0, "error", file.errorString());
     }
     file.close();
-    // return deletedIndex;
-    // cetakData();
 }

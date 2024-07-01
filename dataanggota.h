@@ -22,7 +22,7 @@ public:
     int count;
     void getData();
     void createData(QString nama, QString nim);
-    void updateData(int row, int col, QString value);
+    void updateData(int row, int col, QString value, DataPeminjaman *dataPeminjaman);
     void deleteData(QString nim, DataPeminjaman *dataPeminjaman);
     void searchData(QString query);
 

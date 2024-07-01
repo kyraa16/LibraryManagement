@@ -20,12 +20,10 @@ buku::buku(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *data
     this->dataBuku = dataBuku;
     this->dataPeminjaman = dataPeminjaman;
     this->dataAnggota = dataAnggota;
-    // this->setGeometry(0,0,900,900);
     ui->setupUi(this);
     ui->tableWidget->setColumnCount(5);
     QStringList columnNames;
     columnNames<<"ID"<<"Judul"<<"Penerbit"<<"Author"<<"Aksi";
-    // ui->tableWidget->setRowCount(10);
     ui->tableWidget->setHorizontalHeaderLabels(columnNames);
     refreshTable();
 }
@@ -37,7 +35,6 @@ buku::~buku()
 
 void buku::refreshTable()
 {
-    // searchResult = dataMhs->head;
     struct Buku *buku = this->dataBuku->head;
     int i = 0;
     ui->tableWidget->setRowCount(this->dataBuku->count);
@@ -57,16 +54,6 @@ void buku::refreshTable()
             QTableWidgetItem* item4 = new QTableWidgetItem();
             item4->setText(buku->author);
             ui->tableWidget->setItem(i, 3, item4);
-            // QPushButton *btn_delete;
-            // btn_delete = new QPushButton();
-            // btn_delete->setText("Delete");
-            // connect(btn_delete, &QPushButton::released, this,
-            //         [this, buku]()
-            //         {
-            //             // handleButtonDelete(i);
-            //             handleButtonDelete(buku->id);
-            //         });
-            // ui->tableWidget->setCellWidget(i,4,(QWidget*)btn_delete);
             QButtonGroup *buttonGroup = new QButtonGroup(this);
             QPushButton *btn_pinjam = new QPushButton("Pinjam");
             QPushButton *btn_delete = new QPushButton("Delete");
@@ -82,8 +69,6 @@ void buku::refreshTable()
                         // handleButtonDelete(i);
                         handleButtonPinjam(buku);
                     });
-            // buttonGroup->addButton(btn_pinjam);
-            // buttonGroup->addButton(btn_delete);
             QWidget *buttonWidget = new QWidget();
             QHBoxLayout *layout = new QHBoxLayout(buttonWidget);
             layout->addWidget(btn_pinjam);
@@ -101,7 +86,6 @@ void buku::refreshTable()
     ui->tableWidget->setRowCount(i);
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     finishRenderTable = true;
-    qInfo()<<i;
 }
 
 void buku::on_bukuBaru_clicked()
@@ -114,10 +98,7 @@ void buku::on_bukuBaru_clicked()
 
 void buku::on_peminjaman_clicked()
 {
-    // inputPeminjaman *p = new inputPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
-    // p->show();
-    // p->setGeometry(300, 150, 900, 600);
-    // this->close();
+
 }
 
 
@@ -160,7 +141,7 @@ void buku::on_tableWidget_cellChanged(int row, int column)
     if (finishRenderTable) {
         int i = 0;
         QString val = ui->tableWidget->item(row, column)->text();
-        dataBuku->updateData(row, column, val);
+        dataBuku->updateData(row, column, val, dataPeminjaman);
     }
 }
 
@@ -171,7 +152,6 @@ void buku::handleButtonDelete(int id) {
 }
 
 void buku::handleButtonPinjam(Buku *buku) {
-    qInfo()<<buku->judul;
     inputPeminjaman *ip = new inputPeminjaman(buku, dataBuku,dataPeminjaman,dataAnggota);
     ip->show();
     ip->setGeometry(300, 150, 900, 600);

@@ -26,7 +26,7 @@ public:
     QString timeFormat = "yyyy-MM-dd HH:mm:ss";
     int count;
     void getData();
-    void createData(QString namaAnggota, QString nimAnggota, QString judulBuku, int idBuku);
+    bool createData(QString namaAnggota, QString nimAnggota, QString judulBuku, int idBuku);
     // void updateData(int row, int col, QString value);
     // void deleteData(int id);
     void refreshData();
@@ -34,6 +34,7 @@ public:
     void searchData(QString query);
     void deleteByBuku(int idBuku);
     void deleteByAnggota(QString nim);
+    void updateData(QString keySearch, QString valueSearch, QString keyToUpdate, QString valueToUpdate);
 
 signals:
 };

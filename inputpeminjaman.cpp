@@ -37,9 +37,6 @@ inputPeminjaman::~inputPeminjaman()
 
 void inputPeminjaman::showTabelAnggota()
 {
-    ui->tableWidget->show();
-    // ui->namaAnggota->hide();
-    // ui->pilihAnggota->hide();
     struct Anggota *anggota = this->dataAnggota->head;
     int i = 0;
     ui->tableWidget->setRowCount(this->dataBuku->count);
@@ -59,7 +56,6 @@ void inputPeminjaman::showTabelAnggota()
             connect(btn_pilih, &QPushButton::released, this,
                     [this, anggota, i]()
                     {
-                        // handleButtonpilih(i);
                         handleButtonPilih(anggota, i);
                     });
             ui->tableWidget->setCellWidget(i,2,(QWidget*)btn_pilih);
@@ -75,12 +71,9 @@ void inputPeminjaman::showTabelAnggota()
 
 void inputPeminjaman::handleButtonPilih(Anggota *anggota, int row)
 {
-    // ui->namaAnggota->show();
-    // ui->pilihAnggota->show();
     ui->namaAnggota->setText(anggota->nama);
     ui->tableWidget->selectRow(row);
     this->selectedAnggota = anggota;
-    // ui->tableWidget->hide();
 }
 
 void inputPeminjaman::on_confirmPeminjaman_rejected()
@@ -95,11 +88,15 @@ void inputPeminjaman::on_confirmPeminjaman_rejected()
 void inputPeminjaman::on_confirmPeminjaman_accepted()
 {
     if (selectedAnggota != NULL) {
-        dataPeminjaman->createData(selectedAnggota->nama, selectedAnggota->nim, selectedBook->judul, selectedBook->id);
-        QMessageBox::information(0,"Tambah Peminjaman", "Data peminjaman berhasil ditambah!");
-        listPeminjaman *lp = new listPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
-        lp->show();
-        this->close();
+        bool success = dataPeminjaman->createData(selectedAnggota->nama, selectedAnggota->nim, selectedBook->judul, selectedBook->id);
+        if (success) {
+            QMessageBox::information(0,"Tambah Peminjaman", "Data peminjaman berhasil ditambah!");
+            listPeminjaman *lp = new listPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
+            lp->show();
+            this->close();
+        }
+        else
+            QMessageBox::critical(NULL,"Tambah Peminjaman", "Anggota ini sedang meminjam buku yang sama");
     } else {
         QMessageBox::critical(this,"Tambah Peminjaman", "Pilih anggota terlebih dahulu!");
     }

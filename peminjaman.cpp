@@ -25,8 +25,6 @@ peminjaman::~peminjaman()
 
 void peminjaman::on_listPinjam_clicked()
 {
-    // qInfo()<<"List Peminjaman";
-    // qInfo()<<dataPeminjaman->head->nama;
     listPeminjaman *lp = new listPeminjaman(dataBuku, dataPeminjaman, dataAnggota);
     lp->setGeometry(300, 150, 900, 600);
     lp->show();
@@ -43,7 +41,6 @@ void peminjaman::on_pinjamBuku_clicked()
 
 void peminjaman::on_back2_clicked()
 {
-    qInfo()<<"Library";
     Library *back2 = new Library();
     back2->setGeometry(300, 150, 900, 600);
     back2->show();

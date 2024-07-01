@@ -20,8 +20,6 @@ listPeminjaman::listPeminjaman(DataBuku *dataBuku, DataPeminjaman *dataPeminjama
     ui->tableWidget->setColumnCount(7);
     QStringList columnNames;
     columnNames<<"Nama"<<"NIM"<<"Judul Buku"<<"ID Buku"<<"Status"<<"Waktu Pengembalian"<<"Aksi";
-    // qInfo()<<this->dataPeminjaman->head->nama;
-    // ui->tableWidget->setRowCount(10);
     ui->tableWidget->setHorizontalHeaderLabels(columnNames);
     ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
     refreshTable();
@@ -39,8 +37,7 @@ void listPeminjaman::refreshTable()
     ui->tableWidget->setRowCount(0);
     ui->tableWidget->setRowCount(this->dataPeminjaman->count);
     while (peminjaman != NULL) {
-        if (QString::number(peminjaman->id) == searchQuery || peminjaman->nimAnggota.contains(searchQuery) || peminjaman->namaAnggota.contains(searchQuery, Qt::CaseInsensitive) || searchQuery == "") {
-            // qInfo()<<peminjaman->namaAnggota<<"-"<<peminjaman->nimAnggota;
+        if (QString::number(peminjaman->id) == searchQuery || peminjaman->nimAnggota.contains(searchQuery) || peminjaman->namaAnggota.contains(searchQuery, Qt::CaseInsensitive) || peminjaman->judulBuku.contains(searchQuery, Qt::CaseInsensitive) || searchQuery == "") {
             QTableWidgetItem* item = new QTableWidgetItem();
             item->setText(peminjaman->namaAnggota);
             ui->tableWidget->setItem(i, 0, item);
@@ -79,19 +76,12 @@ void listPeminjaman::refreshTable()
     ui->tableWidget->setRowCount(i);
     ui->tableWidget->setColumnWidth(5, 140);
     ui->tableWidget->setColumnWidth(4, 120);
-    // for (int j = 0; j < i; ++j)
-    //     if (j != 5 && j != 4)
-    //         ui->tableWidget->horizontalHeader()->setSectionResizeMode(j,QHeaderView::Stretch);
     finishRenderTable = true;
-    qInfo()<<i;
 }
 
 void listPeminjaman::handleButtonReturn(int id, QPushButton *btn_kembali) {
-    // Peminjaman *temp = dataPeminjaman->head;
     dataPeminjaman->returnBook(id);
     refreshTable();
-    // btn_kembali->hide();
-    // dataMhs->cetakData();
 }
 
 void listPeminjaman::on_backPeminjaman_clicked()

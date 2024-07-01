@@ -6,8 +6,6 @@
 #include "datapeminjaman.h"
 #include "dataanggota.h"
 
-// buku b;
-
 bukuBaru::bukuBaru(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman,DataAnggota *dataAnggota, QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::bukuBaru)

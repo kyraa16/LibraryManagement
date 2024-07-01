@@ -7,6 +7,7 @@
 #include "datapeminjaman.h"
 #include "dataanggota.h"
 #include "inputanggota.h"
+#include <QMessageBox>
 
 anggota::anggota(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota *dataAnggota, QWidget *parent)
     : QMainWindow(parent)
@@ -20,7 +21,6 @@ anggota::anggota(DataBuku *dataBuku, DataPeminjaman *dataPeminjaman, DataAnggota
     ui->tableWidget->setColumnCount(3);
     QStringList columnNames;
     columnNames<<"Nama Anggota"<<"NIM"<<"Aksi";
-    // ui->tableWidget->setRowCount(10);
     ui->tableWidget->setHorizontalHeaderLabels(columnNames);
     refreshTable();
 }
@@ -32,14 +32,12 @@ anggota::~anggota()
 
 void anggota::refreshTable()
 {
-    // searchResult = dataMhs->head;
     struct Anggota *anggota = this->dataAnggota->head;
     int i = 0;
     ui->tableWidget->setRowCount(this->dataBuku->count+1);
     QTableWidget *currentTable = ui->tableWidget;
     while (anggota != NULL) {
         if (anggota->nim.contains(searchQuery) || anggota->nama.contains(searchQuery, Qt::CaseInsensitive)) {
-            qInfo()<<anggota->nama<<"-"<<anggota->nim;
             QTableWidgetItem* item = new QTableWidgetItem();
             item->setText(anggota->nama);
             ui->tableWidget->setItem(i, 0, item);
@@ -65,7 +63,6 @@ void anggota::refreshTable()
     ui->tableWidget->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
     ui->tableWidget->setRowCount(i);
     finishRenderTable = true;
-    qInfo()<<i;
 }
 
 void anggota::handleButtonDelete(QString nim) {
@@ -102,7 +99,6 @@ void anggota::on_anggotaPeminjaman_clicked()
 
 void anggota::on_anggotaBaru_clicked()
 {
-    qInfo()<<"anggotaBaru";
     inputAnggota *anggotaBaru = new inputAnggota(dataBuku, dataPeminjaman, dataAnggota);
     anggotaBaru->show();
     anggotaBaru->setGeometry(300, 150, 900, 600);
@@ -121,7 +117,26 @@ void anggota::on_tableWidget_cellChanged(int row, int column)
     if (finishRenderTable) {
         int i = 0;
         QString val = ui->tableWidget->item(row, column)->text();
-        dataAnggota->updateData(row, column, val);
+        bool canUpdate = true;
+        if (column == 1) {
+            Anggota *a, *temp = dataAnggota->head;
+            while (temp != NULL) {
+                if (i == row)
+                    a = temp;
+                if (val == temp->nim && temp != a)
+                    canUpdate = false;
+                if (i >= row && !canUpdate)
+                    break;
+                temp = temp->next;
+                i++;
+            }
+            if (!canUpdate) {
+                QMessageBox::critical(this,"Tambah Anggota","NIM sudah ada");
+                ui->tableWidget->setItem(row,column,new QTableWidgetItem(a->nim));
+            }
+        }
+        if (canUpdate)
+            dataAnggota->updateData(row, column, val, dataPeminjaman);
     }
 }
 

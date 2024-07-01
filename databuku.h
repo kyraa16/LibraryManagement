@@ -24,7 +24,7 @@ public:
     int count;
     void getData();
     void createData(QString judul, QString penerbit, QString author);
-    void updateData(int row, int col, QString value);
+    void updateData(int row, int col, QString value, DataPeminjaman *dataPeminjaman);
     void deleteData(int id, DataPeminjaman *dataPeminjaman);
     void searchData(QString query);
 
