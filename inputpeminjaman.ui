@@ -22,7 +22,7 @@
      <rect>
       <x>130</x>
       <y>20</y>
-      <width>656</width>
+      <width>672</width>
       <height>451</height>
      </rect>
     </property>
@@ -134,8 +134,11 @@
            <family>SF Pro Bold</family>
           </font>
          </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
-          <string>Nama Anggota  </string>
+          <string>     Nama Anggota  </string>
          </property>
         </widget>
        </item>
@@ -153,6 +156,9 @@
            <height>20</height>
           </size>
          </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>( Pilih anggota )</string>
          </property>
@@ -160,6 +166,9 @@
        </item>
        <item row="2" column="1">
         <widget class="QLabel" name="idBuku">
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>Text</string>
          </property>
@@ -167,6 +176,9 @@
        </item>
        <item row="3" column="1">
         <widget class="QLabel" name="waktuPengembalian">
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>Text</string>
          </property>
@@ -179,8 +191,11 @@
            <family>SF Pro Bold</family>
           </font>
          </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
-          <string>Judul Buku </string>
+          <string>     Judul Buku </string>
          </property>
         </widget>
        </item>
@@ -191,8 +206,11 @@
            <family>SF Pro Bold</family>
           </font>
          </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
-          <string>Waktu Pengembalian       </string>
+          <string>     Waktu Pengembalian       </string>
          </property>
         </widget>
        </item>
@@ -203,13 +221,19 @@
            <family>SF Pro Bold</family>
           </font>
          </property>
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
-          <string>ID Buku </string>
+          <string>     ID Buku </string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
         <widget class="QLabel" name="judulBuku">
+         <property name="autoFillBackground">
+          <bool>true</bool>
+         </property>
          <property name="text">
           <string>Text</string>
          </property>

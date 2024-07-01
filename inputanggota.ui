@@ -52,7 +52,8 @@
       <widget class="QLineEdit" name="inputNama">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <family>Segoe UI Emoji</family>
+         <pointsize>10</pointsize>
         </font>
        </property>
       </widget>
@@ -61,7 +62,7 @@
       <widget class="QLineEdit" name="inputNim">
        <property name="font">
         <font>
-         <pointsize>12</pointsize>
+         <pointsize>10</pointsize>
         </font>
        </property>
       </widget>

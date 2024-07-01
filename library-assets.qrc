@@ -7,6 +7,8 @@
         <file>wooden-table-with-blurred-background.jpg</file>
         <file>pic3.jpg</file>
         <file>pic4.png</file>
+        <file>pic5.png</file>
+        <file>pic6.png</file>
     </qresource>
     <qresource prefix="/"/>
 </RCC>

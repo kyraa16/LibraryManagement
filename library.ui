@@ -17,7 +17,7 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>130</x>
+      <x>150</x>
       <y>40</y>
       <width>599</width>
       <height>411</height>
@@ -275,10 +275,10 @@ color: rgb(255, 255, 255);</string>
    <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>-420</x>
-      <y>-210</y>
-      <width>1331</width>
-      <height>1251</height>
+      <x>-140</x>
+      <y>-30</y>
+      <width>1211</width>
+      <height>701</height>
      </rect>
     </property>
     <property name="styleSheet">
